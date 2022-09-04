@@ -1,0 +1,11 @@
+en:
+  page_title: "MandalaFreight | Freight management application"
+
+  date:
+    formats:
+      default: "%d/%m/%Y"
+
+  time:
+    formats:
+      default: "%d/%m/%Y at %I:%M %p"
+      filename: "%d_%m_%Y_at_%I_%M_%P"

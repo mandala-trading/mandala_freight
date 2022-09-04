@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: mysql
+  socket: /var/run/mysqld/mysqld.sock
+
+development:
+  <<: *default
+  database: mandala_freight_development
+
+test:
+  <<: *default
+  database: mandala_freight_test
+
+production:
+  <<: *default
+  database: mandala_freight_production
+  username: mandala_freight
+  password: <%= ENV['MANDALA_FREIGHT_DATABASE_PASSWORD'] %>
