@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name])
   end
 
+  def active_sidebar_item_option(option)
+    @active_sidebar_item = option
+  end
+
+  def active_sidebar_sub_item_option(option)
+    @active_sidebar_sub_item = option
+  end
+
   private
 
   def set_current_user

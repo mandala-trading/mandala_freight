@@ -17,7 +17,16 @@
     <%= javascript_pack_tag "application", "data-turbolinks-track": "reload" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body id="app_layout">
+    <div class="container-fluid g-0">
+      <%= render "layouts/sidebar" %>
+
+      <div class="content-container">
+        <div class="main-content">
+          <%= render "shared/flash_message" %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
