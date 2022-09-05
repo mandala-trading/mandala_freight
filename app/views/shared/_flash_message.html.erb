@@ -1,0 +1,5 @@
+<% flash.each do |message_type, message| %>
+  <div class="alert <%= "alert-#{message_type(message_type)}" %>" role="alert">
+    <p class="m-0"><%= flash_message_prefix(message_type(message_type)) %> <%= message %></p>
+  </div>
+<% end %>

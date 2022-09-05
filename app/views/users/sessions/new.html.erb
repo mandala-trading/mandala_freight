@@ -1,0 +1,40 @@
+<% provide(:page_title, "Login") %>
+
+<div class="auth-card-container">
+  <div class="auth-flash-message">
+    <%= render "shared/flash_message" %>
+  </div>
+
+  <div class="auth-card">
+    <h5 class="margin-bottom-30">Login</h5>
+
+    <div class="form-container">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= render "shared/error_messages", resource: resource %>
+
+        <div class="mb-3">
+          <%= f.label :email, class: "form-label" %>
+          <%= f.email_field :email, autocomplete: "email", autofocus: true, class: "form-control", required: true, maxlength: 255 %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :password, "New password", class: "form-label" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control", required: true, minlength: 6, maxlength: 128 %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="form-check">
+            <%= f.check_box :remember_me, class: "form-check-input" %>
+            <%= f.label :remember_me, class: "form-check-label" %>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "Login", class: "btn btn-primary m-0" %>
+        </div>
+      <% end %>
+
+    <hr class="my-4"/>
+    <%= render "users/shared/links" %>
+  </div>
+</div>
