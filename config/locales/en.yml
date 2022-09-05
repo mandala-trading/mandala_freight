@@ -9,3 +9,13 @@ en:
     formats:
       default: "%d/%m/%Y at %I:%M %p"
       filename: "%d_%m_%Y_at_%I_%M_%P"
+
+  alert_prefix:
+    success: "Well done!"
+    info: "Heads up!"
+    warning: "Warning!"
+    danger: "Oh snap!"
+
+  message_type:
+    notice: "success"
+    alert: "danger"

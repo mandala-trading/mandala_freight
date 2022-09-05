@@ -1,0 +1,37 @@
+<% provide(:page_title, "Reset password") %>
+
+<div class="auth-card-container">
+  <div class="auth-flash-message">
+    <%= render "shared/flash_message" %>
+  </div>
+
+  <div class="auth-card">
+    <h5 class="margin-bottom-30">Reset password</h5>
+
+    <div class="form-container">
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+        <%= f.hidden_field :reset_password_token %>
+        <%= render "shared/error_messages", resource: resource %>
+
+        <div class="mb-3">
+          <%= f.label :password, "New password", class: "form-label" %>
+          <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control", required: true, minlength: 6, maxlength: 128 %>
+          <% if @minimum_password_length %>
+            <div class="secondary-text">Password length should be minimum <%= @minimum_password_length %> characters.</div>
+          <% end %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :password_confirmation, class: "form-label" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", required: true, minlength: 6, maxlength: 128 %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Change password", class: "btn btn-primary m-0" %>
+        </div>
+      <% end %>
+
+    <hr class="my-4"/>
+    <%= render "users/shared/links" %>
+  </div>
+</div>

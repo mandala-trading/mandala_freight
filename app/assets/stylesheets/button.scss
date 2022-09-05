@@ -1,0 +1,27 @@
+@import "variables";
+
+.btn {
+  padding: 8px 16px;
+  width: fit-content;
+  border-radius: $default-border-radius;
+  font-size: $font-size;
+  margin: 3px;
+  transition: $default-transition;
+  font-family: "AribauGroteskMedium";
+}
+
+.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+
+  &:hover, &:focus, &:active, &:disabled {
+    background-color: $light-primary-color;
+    border-color: $light-primary-color;
+    box-shadow: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
