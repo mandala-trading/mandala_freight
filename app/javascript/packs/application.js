@@ -11,3 +11,9 @@ import "channels";
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
+
+$(document).on('turbolinks:load', function() {
+  $(".sidebar-item-group").click(function (event) {
+    $(this).find(".sidebar-sub-item-group").slideToggle();
+  });
+});

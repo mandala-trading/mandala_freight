@@ -3,4 +3,20 @@
 .secondary-text {
   font-size: 11px;
   font-family: "AribauGroteskRegular";
+  color: $grey-color;
+}
+
+.hide {
+  display: none;
+}
+
+.content-container {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  margin-left: 230px;
+}
+
+.main-content {
+  padding-left: 20px;
+  padding-right: 20px;
 }

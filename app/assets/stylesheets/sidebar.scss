@@ -1,0 +1,151 @@
+@import "variables";
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  width: 230px;
+  height: 100vh;
+  background-color: $white-color;
+  padding-bottom: 65px;
+  transition: $default-transition;
+
+  .brand-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-family: "AribauGroteskMedium";
+
+    span:first-child {
+      font-size: 20px;
+    }
+
+    span:last-child {
+      font-size: 16px;
+      display: block;
+      background-color: $primary-color;
+      color: $white-color;
+      padding: 2px 6px;
+      border-radius: $default-border-radius;
+    }
+  }
+
+  .footer {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary-color;
+    position: fixed;
+    bottom: 0;
+    width: 230px;
+  }
+
+  .settings-icon {
+    display: flex;
+    align-items: center;
+    color: $white-color;
+
+    span {
+      font-size: 14px;
+      margin-left: 5px;
+      font-family: "AribauGroteskMedium";
+      max-width: 150px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  .logout-icon {
+    padding: 4px;
+    background-color: $white-color;
+    color: $red-color;
+    border-radius: $default-border-radius;
+    transition: $default-transition;
+
+    &:hover {
+      background-color: $red-color;
+      color: $white-color;
+    }
+  }
+}
+
+.sidebar-item-groups {
+  margin-right: 10px;
+}
+
+.sidebar-item {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  transition: $default-transition;
+
+  .indicator {
+    margin: 7px 6px 7px 0px;
+    border-top-right-radius: $default-border-radius;
+    border-bottom-right-radius: $default-border-radius;
+    width: 4px;
+  }
+
+  .link {
+    color: $grey-color;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-family: "AribauGroteskMedium";
+    border-radius: $default-border-radius;
+    width: 100%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $primary-bg-color;
+      color: $light-primary-color;
+    }
+  }
+
+  &.active {
+    .indicator {
+      background-color: $primary-color;
+    }
+
+    .link {
+      background-color: $primary-bg-color;
+      color: $primary-color;
+    }
+
+    & + .hide {
+      display: block;
+    }
+  }
+}
+
+.sidebar-sub-item {
+  display: flex;
+
+  .indicator {
+    margin: 7px 20px 7px 0px;
+    border-top-right-radius: $default-border-radius;
+    border-bottom-right-radius: $default-border-radius;
+    width: 4px;
+  }
+
+  .link {
+    color: $grey-color;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: $default-border-radius;
+    width: 100%;
+
+    &:hover {
+      background-color: $primary-bg-color;
+      color: $light-primary-color;
+    }
+  }
+
+  &.active {
+    .link {
+      color: $primary-color;
+    }
+  }
+}
