@@ -19,3 +19,17 @@ en:
   message_type:
     notice: "success"
     alert: "danger"
+
+  status:
+    archived: "Archived"
+    active: "Active"
+
+  flash_messages:
+    created: "%{name} has been successfully created."
+    updated: "%{name} has been successfully updated."
+    deleted: "%{name} has been successfully deleted."
+    imported: "%{name} have been successfully imported."
+
+  email_subjects:
+    data_import_success: "%{module_name} Imported"
+    data_import_failure: "%{module_name} Partially Imported"

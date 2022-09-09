@@ -1,0 +1,28 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><%= sort_link @search, :name, "Name" %></th>
+        <th scope="col"><%= sort_link @search, :short_name, "Short Name" %></th>
+        <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @countries.each do |country| %>
+        <tr>
+          <td scope="row"><%= details_link_using_modal(controller_name, country, country.name) %></td>
+          <td><%= country.short_name %></td>
+          <td><%= country.archived_status %></td>
+          <td>
+            <div class="button-group">
+              <%= edit_link_using_modal(controller_name, country) %>
+              <%= change_logs_link_using_modal(controller_name, country) %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

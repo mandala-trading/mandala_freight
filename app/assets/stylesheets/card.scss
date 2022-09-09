@@ -20,3 +20,19 @@
   max-width: 500px;
   width: 100%;
 }
+
+.page-card {
+  border-radius: $default-border-radius;
+  background-color: $white-color;
+  box-shadow: $default-box-shadow;
+}
+
+.page-card-header {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-card-body {
+  padding: 30px;
+}

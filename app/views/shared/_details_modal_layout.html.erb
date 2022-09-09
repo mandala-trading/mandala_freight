@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="formModalLabel"><%= resource.details_modal_header %></h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+  <%= yield %>
+</div>
+
+<div class="modal-footer">
+  <div class="button-group">
+    <button type="button" class="btn btn-light" data-bs-dismiss="modal" title="Close">Close</button>
+  </div>
+</div>

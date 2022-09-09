@@ -1,6 +1,6 @@
 @import "variables";
 
-.form-label, .col-form-label {
+.form-label {
   font-size: $small-font-size;
   margin-bottom: 3px;
   font-family: "AribauGroteskLight";
@@ -19,6 +19,10 @@
   &:focus, &:hover {
     box-shadow: none;
     border-color: $primary-color;
+  }
+
+  &.file {
+    padding: 0.375rem .75rem
   }
 }
 
@@ -40,4 +44,9 @@
 
 .actions {
   margin-top: 25px;
+}
+
+.search-form {
+  width: 100%;
+  max-width: 350px;
 }
