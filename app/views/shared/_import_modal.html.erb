@@ -1,0 +1,27 @@
+<div class="modal fade" id="import_modal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="importModalLabel">Import <%= controller_name.display %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <%= form_tag url_for(controller: controller_name, action: "import"), multipart: true do %>
+        <div class="modal-body">
+          <div class="mb-3">
+            <%= file_field_tag :file, class: "file form-control", required: true, accept: ".csv" %>
+            <small class="secondary-text">Data import supports only CSV files. First <%= ENV["IMPORT_ROWS_LIMIT"] %> rows will be imported from the file.</small>
+            <%= link_to "Download sample CSV file", "/csv_files/#{controller_name}.csv", title: "Download sample CSV file" %>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div class="button-group">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal" title="Close">Close</button>
+            <%= submit_tag "Import", class: "btn btn-primary", title: "Import #{controller_name.display}" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

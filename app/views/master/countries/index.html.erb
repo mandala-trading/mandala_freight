@@ -1,0 +1,44 @@
+<% provide(:page_title, "Countries") %>
+<% provide(:page_header, "Countries") %>
+
+<% content_for :header_right_section do %>
+  <%= link_to "#", class: "header-icon-link margin-right-10", title: "Page settings" do %>
+    <i class="bi bi-funnel-fill"></i>
+  <% end %>
+
+  <%= link_to "#", class: "header-icon-link", title: "Filter settings" do %>
+    <i class="bi bi-gear-fill"></i>
+  <% end %>
+<% end %>
+
+<div class="page-card">
+  <div class="page-card-header">
+    <%= render "shared/search_form", path: master_countries_path, search_key: :name_or_short_name_i_cont, title_text: "Search with name or short name" %>
+
+    <div class="button-group">
+      <%= new_link_using_modal(controller_name) %>
+      <%= filter_link_using_modal(controller_name) %>
+
+      <div class="dropdown action-dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-three-dots-vertical"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><%= export_link(controller_name) %></li>
+          <li><%= import_link_using_modal(controller_name) %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-card-body">
+    <% if @countries.present? %>
+      <%= render "table" %>
+      <%= render "shared/pagy" %>
+    <% else %>
+      <%= render "shared/empty_record" %>
+    <% end %>
+  </div>
+</div>
+
+<%= render "shared/import_modal" %>

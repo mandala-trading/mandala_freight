@@ -1,0 +1,22 @@
+<%= render layout: "shared/details_modal_layout", locals: { resource: @country } do |f| %>
+  <div class="table-responsive">
+    <table class="table details-table">
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td><%= @country.name %></td>
+        </tr>
+
+        <tr>
+          <td>Short Name</td>
+          <td><%= @country.short_name %></td>
+        </tr>
+
+        <tr>
+          <td>Status</td>
+          <td><%= @country.archived_status %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>
