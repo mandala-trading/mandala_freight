@@ -1,0 +1,7 @@
+<% if resource.errors.include?(key) %>
+  <span class="secondary-text text-danger">
+    <% resource.errors.full_messages_for(key).each do |error_message| %>
+      <%= "#{error_message}. " %>
+    <% end %>
+  </span>
+<% end %>

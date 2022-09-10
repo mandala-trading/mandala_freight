@@ -1,15 +1,7 @@
 <% provide(:page_title, "Countries") %>
 <% provide(:page_header, "Countries") %>
-
-<% content_for :header_right_section do %>
-  <%= link_to "#", class: "header-icon-link margin-right-10", title: "Page settings" do %>
-    <i class="bi bi-funnel-fill"></i>
-  <% end %>
-
-  <%= link_to "#", class: "header-icon-link", title: "Filter settings" do %>
-    <i class="bi bi-gear-fill"></i>
-  <% end %>
-<% end %>
+<% provide(:page_settings, true) %>
+<% provide(:filter_settings, true) %>
 
 <div class="page-card">
   <div class="page-card-header">

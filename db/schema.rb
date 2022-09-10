@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_05_153135) do
+ActiveRecord::Schema.define(version: 2022_09_09_133951) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", default: "", null: false
+    t.string "name", limit: 250, default: "", null: false
     t.string "time_zone", limit: 50, default: "UTC", null: false
     t.integer "users_count", default: 0, null: false
     t.integer "countries_count", default: 0, null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2022_09_05_153135) do
   end
 
   create_table "countries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", default: "", null: false
+    t.string "name", limit: 250, default: "", null: false
     t.string "short_name", limit: 20, default: "", null: false
     t.boolean "archived", default: false, null: false
     t.bigint "account_id", null: false
@@ -35,10 +35,21 @@ ActiveRecord::Schema.define(version: 2022_09_05_153135) do
     t.index ["updated_by_id"], name: "index_countries_on_updated_by_id"
   end
 
+  create_table "page_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "module_name", limit: 250, null: false
+    t.string "module_class", limit: 250, null: false
+    t.integer "page_items", default: 20, null: false
+    t.json "column_settings", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_page_settings_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "first_name", default: "", null: false
-    t.string "last_name", default: "", null: false
-    t.string "email", default: "", null: false
+    t.string "first_name", limit: 250, default: "", null: false
+    t.string "last_name", limit: 250, default: "", null: false
+    t.string "email", limit: 250, default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.boolean "active", default: true, null: false
     t.boolean "superadmin", default: false, null: false
@@ -68,5 +79,6 @@ ActiveRecord::Schema.define(version: 2022_09_05_153135) do
   end
 
   add_foreign_key "countries", "accounts"
+  add_foreign_key "page_settings", "users"
   add_foreign_key "users", "accounts"
 end

@@ -6,10 +6,6 @@ Rails.application.routes.draw do
       get :export, on: :collection
     end
 
-    concern :change_loggable do
-      get :change_logs, on: :member
-    end
-
     concern :filterable do
       get :filter, on: :collection
     end
@@ -18,6 +14,6 @@ Rails.application.routes.draw do
       post :import, on: :collection
     end
 
-    resources :countries, concerns: %i[exportable importable change_loggable filterable]
+    resources :countries, concerns: %i[exportable importable filterable]
   end
 end

@@ -1,4 +1,4 @@
 <%= search_form_for @search, url: path, class: "search-form" do |f| %>
-  <%= f.search_field search_key, placeholder: "Search...", class: "form-control", maxlength: 255, title: title_text %>
+  <%= f.search_field search_key, placeholder: "Search...", class: "form-control", maxlength: 250, title: title_text %>
   <small class="secondary-text">Press ↩ to search with keyword</small>
 <% end %>

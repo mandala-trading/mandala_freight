@@ -14,7 +14,13 @@ class User < ApplicationRecord
 
   belongs_to :account, counter_cache: true
 
-  validates :first_name, :last_name, :email, presence: true, length: { maximum: 255 }
+  has_many :page_settings, dependent: :destroy
+
+  validates :first_name, :last_name, :email, presence: true, length: { maximum: 250 }
+
+  def find_page_setting(find_page_setting)
+    page_settings.find_by(find_page_setting) || page_settings.create(find_page_setting)
+  end
 
   def initial
     "#{first_name[0]}#{last_name[0]}".upcase

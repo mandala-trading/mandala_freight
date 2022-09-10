@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="formModalLabel">Edit Page Setting</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<%= form_for @page_setting, remote: true do |f| %>
+  <div class="modal-body">
+    <%= render partial: "shared/error_messages", locals: { resource: @page_setting } %>
+
+    <div class="mb-3">
+      <%= f.label :page_items, class: "form-label required" %>
+      <%= f.number_field :page_items, autofocus: true, placeholder: "Page Items Count", class: "form-control", required: true, step: 1, min: 5, max: 50 %>
+      <%= render "shared/field_error_messages", resource: @page_setting, key: :page_items %>
+    </div>
+
+    <h6 class="margin-top-20 margin-bottom-10">Column Settings</h6>
+    <% all_index_columns.each do |key, value| %>
+      <div class="mb-2">
+        <div class="custom-switch-container">
+          <span class="custom-switch-label"><%= value[:label] %></span>
+          <label class="switch">
+            <%= check_box_tag "page_setting[off_columns][]", key, enabled_grid_option_keys.include?(key), class: "switch-input" %>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="modal-footer">
+    <div class="button-group">
+      <button type="button" class="btn btn-light" data-bs-dismiss="modal" title="Close">Close</button>
+      <%= f.submit "Save", class: "btn btn-primary", title: "Save" %>
+    </div>
+  </div>
+<% end %>

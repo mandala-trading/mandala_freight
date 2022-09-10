@@ -5,7 +5,6 @@
 
 <%= form_for [namespace.to_sym, resource], remote: true do |f| %>
   <div class="modal-body">
-    <%= render partial: "shared/error_messages", locals: { resource: resource } %>
     <%= yield f %>
   </div>
   <div class="modal-footer">

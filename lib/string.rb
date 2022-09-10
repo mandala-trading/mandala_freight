@@ -12,4 +12,8 @@ class String
   def singular_downcase_display
     singularize.humanize.downcase
   end
+
+  def to_bool
+    self == "true"
+  end
 end
