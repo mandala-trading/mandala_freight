@@ -1,12 +1,14 @@
 <%= render layout: "shared/form_modal_layout", locals: { resource: @country, namespace: "master" } do |f| %>
   <div class="mb-3">
     <%= f.label :name, class: "form-label required" %>
-    <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "form-control", required: true, maxlength: 255 %>
+    <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "form-control", required: true, maxlength: 250 %>
+    <%= render "shared/field_error_messages", resource: @country, key: :name %>
   </div>
 
   <div class="mb-3">
     <%= f.label :short_name, class: "form-label required" %>
     <%= f.text_field :short_name, placeholder: "Short Name", class: "form-control", required: true, maxlength: 20 %>
+    <%= render "shared/field_error_messages", resource: @country, key: :short_name %>
   </div>
 
   <div class="mb-0">

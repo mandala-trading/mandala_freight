@@ -8,7 +8,7 @@ module Master
     def index
       @search = current_account.countries.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
-      @pagy, @countries = pagy(@search.result)
+      @pagy, @countries = pagy(@search.result, items: page_setting.page_items)
     end
 
     def show
@@ -25,7 +25,7 @@ module Master
       if @country.save
         redirect_to master_countries_path, flash: { success: t("flash_messages.created", name: "Country") }
       else
-        render :form_update, status: :unprocessable_entity
+        render :new
       end
     end
 
@@ -37,7 +37,7 @@ module Master
       if country.update(country_params)
         redirect_to master_countries_path, flash: { success: t("flash_messages.updated", name: "Country") }
       else
-        render :form_update, status: :unprocessable_entity
+        render :edit
       end
     end
 
@@ -48,11 +48,6 @@ module Master
       else
         redirect_to master_countries_path, status: :unprocessable_entity, flash: { danger: "Unable to delete" }
       end
-    end
-
-    def change_logs
-      @versions = country.versions.includes(:item).reverse
-      render "shared/change_logs"
     end
 
     def filter
@@ -86,6 +81,10 @@ module Master
 
     def country
       @country ||= current_account.countries.find(params[:id])
+    end
+
+    def page_setting_constant
+      { module_name: "master_countries", module_class: "Country" }
     end
   end
 end

@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name])
   end
 
+  def page_setting
+    @page_setting ||= current_user.find_page_setting(page_setting_constant)
+  end
+
   def active_sidebar_item_option(option)
     @active_sidebar_item = option
   end

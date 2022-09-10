@@ -1,7 +1,7 @@
 class CreateCountries < ActiveRecord::Migration[6.1]
   def change
     create_table :countries do |t|
-      t.string     :name,           null: false, default: "", limit: 255
+      t.string     :name,           null: false, default: "", limit: 250
       t.string     :short_name,     null: false, default: "", limit: 20
       t.boolean    :archived,       null: false, default: false
       t.references :account,        null: false, foreign_key: true

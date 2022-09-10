@@ -14,7 +14,7 @@
 
         <div class="mb-3">
           <%= f.label :email, class: "form-label" %>
-          <%= f.email_field :email, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), autocomplete: "email", autofocus: true, class: "form-control", required: true, maxlength: 255 %>
+          <%= f.email_field :email, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), autocomplete: "email", autofocus: true, class: "form-control", required: true, maxlength: 250 %>
         </div>
 
         <div class="actions">

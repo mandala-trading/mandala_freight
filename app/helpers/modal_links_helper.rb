@@ -41,14 +41,6 @@ module ModalLinksHelper
             title: "Show #{controller_name.singular_display}"
   end
 
-  def change_logs_link_using_modal(controller_name, resource)
-    link_to "Logs",
-            url_for(controller: controller_name, action: "change_logs", id: resource.id),
-            remote: true,
-            title: "Show Change Logs",
-            class: "btn btn-light btn-sm"
-  end
-
   def export_link(controller_name)
     link_to "Export",
             url_for(controller: controller_name, action: "export", format: "xlsx",
