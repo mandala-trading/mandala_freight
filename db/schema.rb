@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_133951) do
     t.string "short_name", limit: 20, default: "", null: false
     t.boolean "archived", default: false, null: false
     t.bigint "account_id", null: false
+    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_133951) do
     t.string "module_class", limit: 250, null: false
     t.integer "page_items", default: 20, null: false
     t.json "column_settings", null: false
+    t.boolean "hide_deleted_records", default: true, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

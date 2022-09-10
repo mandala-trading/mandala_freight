@@ -10,6 +10,7 @@ gem "bootsnap", "~> 1.13", require: false
 gem "breadcrumbs", "~> 0.3.0"
 gem "caxlsx_rails", "~> 0.6.3"
 gem "devise", "~> 4.8", ">= 4.8.1"
+gem "discard", "~> 1.2", ">= 1.2.1"
 gem "dotenv-rails", "~> 2.8", ">= 2.8.1"
 gem "jbuilder", "~> 2.11", ">= 2.11.5"
 gem "mysql2", "~> 0.5.4"

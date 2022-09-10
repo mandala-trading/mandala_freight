@@ -6,7 +6,7 @@ module Master
     before_action { breadcrumbs.add "Countries", master_countries_path, title: "Countries List" }
 
     def index
-      @search = current_account.countries.ransack(params[:q])
+      @search = current_account.countries.public_send(page_setting.filter).ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @pagy, @countries = pagy(@search.result, items: page_setting.page_items)
     end
@@ -43,10 +43,17 @@ module Master
 
     def destroy
       if country.destroy
-        redirect_to master_countries_path, status: :see_other,
-                                           flash: { success: t("flash_messages.deleted", name: "Country") }
+        redirect_to master_countries_path, flash: { success: t("flash_messages.deleted", name: "Country") }
       else
-        redirect_to master_countries_path, status: :unprocessable_entity, flash: { danger: "Unable to delete" }
+        redirect_to master_countries_path, flash: { danger: t("flash_messages.already_deleted", name: "Country") }
+      end
+    end
+
+    def restore
+      if country.restore
+        redirect_to master_countries_path, flash: { success: t("flash_messages.restored", name: "Country") }
+      else
+        redirect_to master_countries_path, flash: { danger: t("flash_messages.already_restored", name: "Country") }
       end
     end
 
@@ -56,7 +63,7 @@ module Master
     end
 
     def export
-      @search = current_account.countries.ransack(params[:q])
+      @search = current_account.countries.public_send(page_setting.filter).ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @countries = @search.result
 

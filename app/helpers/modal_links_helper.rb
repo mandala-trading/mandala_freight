@@ -41,14 +41,6 @@ module ModalLinksHelper
             title: "Show #{controller_name.singular_display}"
   end
 
-  def export_link(controller_name)
-    link_to "Export",
-            url_for(controller: controller_name, action: "export", format: "xlsx",
-                    params: { q: params[:q]&.to_unsafe_h.to_h }),
-            title: "Export #{controller_name.display}",
-            class: "dropdown-item"
-  end
-
   def import_link_using_modal(controller_name)
     link_to "Import",
             "#",

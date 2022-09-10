@@ -5,6 +5,7 @@ class CreateCountries < ActiveRecord::Migration[6.1]
       t.string     :short_name,     null: false, default: "", limit: 20
       t.boolean    :archived,       null: false, default: false
       t.references :account,        null: false, foreign_key: true
+      t.datetime   :discarded_at
       t.bigint     :created_by_id,               index: true
       t.bigint     :updated_by_id,               index: true
 

@@ -14,6 +14,7 @@ class PageSetting < ApplicationRecord
                            uniqueness: { case_sensitive: false, scope: :module_name }, inclusion: { in: MODULE_CLASSES }
   validates :page_items, presence: true, numericality: { only_integer: true, in: [5..50] }
   validates :column_settings, presence: true
+  validates :hide_deleted_records, inclusion: { in: [true, false] }
 
   def off_columns
     column_settings["off_columns"].map(&:to_sym)
@@ -29,6 +30,10 @@ class PageSetting < ApplicationRecord
 
   def enabled_index_column_keys
     index_columns.keys - off_columns
+  end
+
+  def filter
+    hide_deleted_records? ? "kept" : "all"
   end
 
   private

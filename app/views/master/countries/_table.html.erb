@@ -18,6 +18,8 @@
           <td>
             <div class="button-group">
               <%= edit_link_using_modal(controller_name, country) %>
+              <%= delete_link(controller_name, country) if country.undiscarded? %>
+              <%= restore_link(controller_name, country) if country.discarded? %>
             </div>
           </td>
         </tr>

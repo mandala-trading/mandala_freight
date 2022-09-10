@@ -12,7 +12,7 @@ module CountriesHelper
     when :short_name
       resource.short_name
     when :status
-      resource.archived_status
+      resource.display_status
     end
   end
 end

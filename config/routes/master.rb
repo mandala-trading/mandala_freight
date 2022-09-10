@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       post :import, on: :collection
     end
 
-    resources :countries, concerns: %i[exportable importable filterable]
+    concern :restorable do
+      put :restore, on: :member
+    end
+
+    resources :countries, concerns: %i[exportable importable filterable restorable]
   end
 end
