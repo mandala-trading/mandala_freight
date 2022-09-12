@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class PageSetting < ApplicationRecord
-  MODULE_NAMES = ["master_countries"].freeze
-  MODULE_CLASSES = ["Country"].freeze
+  MODULE_NAMES = %w[master_countries master_currencies].freeze
+  MODULE_CLASSES = %w[Country Currency].freeze
 
   before_validation :set_column_settings, on: :create
 

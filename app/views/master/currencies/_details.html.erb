@@ -1,0 +1,27 @@
+<%= render layout: "shared/details_modal_layout", locals: { resource: @currency } do |f| %>
+  <div class="table-responsive">
+    <table class="table details-table">
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td><%= @currency.name %></td>
+        </tr>
+
+        <tr>
+          <td>Code</td>
+          <td><%= @currency.code %></td>
+        </tr>
+
+        <tr>
+          <td>Symbol</td>
+          <td><%= @currency.symbol %></td>
+        </tr>
+
+        <tr>
+          <td>Status</td>
+          <td><%= @currency.display_status %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>

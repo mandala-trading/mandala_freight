@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <% enabled_grid_option_keys.each do |key| %>
+          <%= generate_table_header(key) %>
+        <% end %>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @currencies.each do |currency| %>
+        <tr>
+          <% enabled_grid_option_keys.each do |key| %>
+            <td><%= currencies_table_defination(key, currency) %></td>
+          <% end %>
+          <td>
+            <div class="button-group">
+              <%= edit_link_using_modal(controller_name, currency) %>
+              <%= delete_link(controller_name, currency) if currency.undiscarded? %>
+              <%= restore_link(controller_name, currency) if currency.discarded? %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

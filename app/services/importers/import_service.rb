@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "smarter_csv"
+require "csv"
 
 module Importers
   class ImportService < ApplicationService

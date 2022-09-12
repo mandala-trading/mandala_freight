@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       put :restore, on: :member
     end
 
-    resources :countries, concerns: %i[exportable importable filterable restorable]
+    resources :countries,  concerns: %i[exportable importable filterable restorable]
+    resources :currencies, concerns: %i[exportable importable filterable restorable]
   end
 end

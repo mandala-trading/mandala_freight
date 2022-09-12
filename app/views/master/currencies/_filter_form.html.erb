@@ -1,0 +1,8 @@
+<%= render layout: "shared/filter_modal_layout", locals: { filter_path: master_currencies_path } do |f| %>
+  <div class="row">
+    <div class="col-12 mb-3">
+      <%= f.label :archived_eq, "Status", class: "form-label" %>
+      <%= f.select :archived_eq, status_filter_list, { include_blank: true, prompt: "-- Select one status --" }, { class: "form-control" } %>
+    </div>
+  </div>
+<% end %>
