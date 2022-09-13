@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_09_133951) do
+ActiveRecord::Schema.define(version: 2022_09_12_132454) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
     t.string "time_zone", limit: 50, default: "UTC", null: false
     t.integer "users_count", default: 0, null: false
     t.integer "countries_count", default: 0, null: false
+    t.integer "currencies_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -34,6 +35,22 @@ ActiveRecord::Schema.define(version: 2022_09_09_133951) do
     t.index ["account_id"], name: "index_countries_on_account_id"
     t.index ["created_by_id"], name: "index_countries_on_created_by_id"
     t.index ["updated_by_id"], name: "index_countries_on_updated_by_id"
+  end
+
+  create_table "currencies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "code", default: "", null: false
+    t.string "symbol", default: "", null: false
+    t.boolean "archived", default: false, null: false
+    t.bigint "account_id", null: false
+    t.datetime "discarded_at"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_currencies_on_account_id"
+    t.index ["created_by_id"], name: "index_currencies_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_currencies_on_updated_by_id"
   end
 
   create_table "page_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -81,6 +98,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_133951) do
   end
 
   add_foreign_key "countries", "accounts"
+  add_foreign_key "currencies", "accounts"
   add_foreign_key "page_settings", "users"
   add_foreign_key "users", "accounts"
 end

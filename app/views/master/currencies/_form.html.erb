@@ -1,0 +1,24 @@
+<%= render layout: "shared/form_modal_layout", locals: { resource: @currency, namespace: "master" } do |f| %>
+  <div class="mb-3">
+    <%= f.label :name, class: "form-label required" %>
+    <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "form-control", required: true, maxlength: 250 %>
+    <%= render "shared/field_error_messages", resource: @currency, key: :name %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :code, class: "form-label required" %>
+    <%= f.text_field :code, placeholder: "Code", class: "form-control", required: true, maxlength: 20 %>
+    <%= render "shared/field_error_messages", resource: @currency, key: :code %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :symbol, class: "form-label required" %>
+    <%= f.text_field :symbol, placeholder: "Symbol", class: "form-control", required: true, maxlength: 20 %>
+    <%= render "shared/field_error_messages", resource: @currency, key: :symbol %>
+  </div>
+
+  <div class="mb-0">
+    <%= f.check_box :archived, class: "form-check-input" %>
+    <%= f.label :archived, class: "form-check-label" %>
+  </div>
+<% end %>
