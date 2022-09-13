@@ -1,0 +1,26 @@
+<%= render layout: "shared/filter_modal_layout", locals: { filter_path: master_ports_path } do |f| %>
+  <div class="mb-3">
+    <%= f.label :loading_port_eq, "Loading Port", class: "form-label" %>
+    <%= f.select :loading_port_eq, port_flag_filter_list, { include_blank: true, prompt: "-- Select one flag --" }, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :transhipment_port_eq, "Transhipment Port", class: "form-label" %>
+    <%= f.select :transhipment_port_eq, port_flag_filter_list, { include_blank: true, prompt: "-- Select one flag --" }, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :discharge_port_eq, "Discharge Port", class: "form-label" %>
+    <%= f.select :discharge_port_eq, port_flag_filter_list, { include_blank: true, prompt: "-- Select one flag --" }, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :delivery_port_eq, "Delivery Port", class: "form-label" %>
+    <%= f.select :delivery_port_eq, port_flag_filter_list, { include_blank: true, prompt: "-- Select one flag --" }, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-0">
+    <%= f.label :archived_eq, "Status", class: "form-label" %>
+    <%= f.select :archived_eq, status_filter_list, { include_blank: true, prompt: "-- Select one status --" }, { class: "form-control" } %>
+  </div>
+<% end %>

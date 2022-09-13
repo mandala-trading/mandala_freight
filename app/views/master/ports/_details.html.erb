@@ -1,0 +1,47 @@
+<%= render layout: "shared/details_modal_layout", locals: { resource: @port } do |f| %>
+  <div class="table-responsive">
+    <table class="table details-table">
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td><%= @port.name %></td>
+        </tr>
+
+        <tr>
+          <td>City</td>
+          <td><%= @port.city %></td>
+        </tr>
+
+        <tr>
+          <td>Country</td>
+          <td><%= @port.country_name %></td>
+        </tr>
+
+        <tr>
+          <td>Loading Port</td>
+          <td><%= @port.loading_port.display %></td>
+        </tr>
+
+        <tr>
+          <td>Transhipment Port</td>
+          <td><%= @port.transhipment_port.display %></td>
+        </tr>
+
+        <tr>
+          <td>Discharge Port</td>
+          <td><%= @port.discharge_port.display %></td>
+        </tr>
+
+        <tr>
+          <td>Delivery Port</td>
+          <td><%= @port.delivery_port.display %></td>
+        </tr>
+
+        <tr>
+          <td>Status</td>
+          <td><%= @port.display_status %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>

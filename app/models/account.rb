@@ -6,6 +6,7 @@ class Account < ApplicationRecord
   has_many :users, dependent: :destroy
   has_many :countries, dependent: :destroy
   has_many :currencies, dependent: :destroy
+  has_many :ports, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 250 }
   validates :time_zone, presence: true, length: { maximum: 50 }

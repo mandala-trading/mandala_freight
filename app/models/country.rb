@@ -19,6 +19,8 @@ class Country < ApplicationRecord
   validates :short_name, presence: true, length: { maximum: 20 },
                          uniqueness: { case_sensitive: false, scope: :account_id }
 
+  scope :order_by_name, -> { order(:name) }
+
   def display_status
     discarded? ? I18n.t("status.deleted") : archived_status
   end

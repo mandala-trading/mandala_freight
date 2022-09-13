@@ -4,4 +4,8 @@ module FiltersHelper
   def status_filter_list
     [["Active", false], ["Archived", true]]
   end
+
+  def port_flag_filter_list
+    [["Yes", true], ["No", false]]
+  end
 end

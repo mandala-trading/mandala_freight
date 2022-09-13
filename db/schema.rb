@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_12_132454) do
+ActiveRecord::Schema.define(version: 2022_09_13_153139) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2022_09_12_132454) do
     t.integer "users_count", default: 0, null: false
     t.integer "countries_count", default: 0, null: false
     t.integer "currencies_count", default: 0, null: false
+    t.integer "ports_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -38,9 +39,9 @@ ActiveRecord::Schema.define(version: 2022_09_12_132454) do
   end
 
   create_table "currencies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.string "code", default: "", null: false
-    t.string "symbol", default: "", null: false
+    t.string "name", limit: 250, default: "", null: false
+    t.string "code", limit: 20, default: "", null: false
+    t.string "symbol", limit: 20, default: "", null: false
     t.boolean "archived", default: false, null: false
     t.bigint "account_id", null: false
     t.datetime "discarded_at"
@@ -63,6 +64,27 @@ ActiveRecord::Schema.define(version: 2022_09_12_132454) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_page_settings_on_user_id"
+  end
+
+  create_table "ports", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", limit: 250, null: false
+    t.string "city", limit: 250, null: false
+    t.bigint "country_id", null: false
+    t.boolean "loading_port", default: false, null: false
+    t.boolean "transhipment_port", default: false, null: false
+    t.boolean "discharge_port", default: false, null: false
+    t.boolean "delivery_port", default: false, null: false
+    t.boolean "archived", default: false, null: false
+    t.bigint "account_id", null: false
+    t.datetime "discarded_at"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_ports_on_account_id"
+    t.index ["country_id"], name: "index_ports_on_country_id"
+    t.index ["created_by_id"], name: "index_ports_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_ports_on_updated_by_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -100,5 +122,7 @@ ActiveRecord::Schema.define(version: 2022_09_12_132454) do
   add_foreign_key "countries", "accounts"
   add_foreign_key "currencies", "accounts"
   add_foreign_key "page_settings", "users"
+  add_foreign_key "ports", "accounts"
+  add_foreign_key "ports", "countries"
   add_foreign_key "users", "accounts"
 end

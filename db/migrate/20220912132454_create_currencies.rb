@@ -1,9 +1,9 @@
 class CreateCurrencies < ActiveRecord::Migration[6.1]
   def change
     create_table :currencies do |t|
-      t.string     :name,          null: false, default: "", limit: 255
-      t.string     :code,          null: false, default: "", limit: 255
-      t.string     :symbol,        null: false, default: "", limit: 255
+      t.string     :name,          null: false, default: "", limit: 250
+      t.string     :code,          null: false, default: "", limit: 20
+      t.string     :symbol,        null: false, default: "", limit: 20
       t.boolean    :archived,      null: false, default: false
       t.references :account,       null: false, foreign_key: true
       t.datetime   :discarded_at

@@ -20,5 +20,6 @@ Rails.application.routes.draw do
 
     resources :countries,  concerns: %i[exportable importable filterable restorable]
     resources :currencies, concerns: %i[exportable importable filterable restorable]
+    resources :ports,      concerns: %i[exportable importable filterable restorable]
   end
 end

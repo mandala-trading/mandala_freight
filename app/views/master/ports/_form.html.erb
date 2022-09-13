@@ -1,0 +1,46 @@
+<%= render layout: "shared/form_modal_layout", locals: { resource: @port, namespace: "master" } do |f| %>
+  <div class="mb-3">
+    <%= f.label :name, class: "form-label required" %>
+    <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "form-control", required: true, maxlength: 250 %>
+    <%= render "shared/field_error_messages", resource: @port, key: :name %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :city, class: "form-label required" %>
+    <%= f.text_field :city, placeholder: "City", class: "form-control", required: true, maxlength: 250 %>
+    <%= render "shared/field_error_messages", resource: @port, key: :city %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :country_id, "Country", class: "form-label" %>
+    <%= f.select :country_id, country_list(@port.country_id), { prompt: "-- Select one country --" }, { class: "form-control" } %>
+    <%= render "shared/field_error_messages", resource: @port, key: :country_id %>
+  </div>
+
+  <div class="row">
+    <div class="mb-3 col-12 col-md-6">
+      <%= f.check_box :loading_port, class: "form-check-input" %>
+      <%= f.label :loading_port, class: "form-check-label" %>
+    </div>
+
+    <div class="mb-3 col-12 col-md-6">
+      <%= f.check_box :transhipment_port, class: "form-check-input" %>
+      <%= f.label :transhipment_port, class: "form-check-label" %>
+    </div>
+
+    <div class="mb-3 col-12 col-md-6">
+      <%= f.check_box :discharge_port, class: "form-check-input" %>
+      <%= f.label :discharge_port, class: "form-check-label" %>
+    </div>
+
+    <div class="mb-3 col-12 col-md-6">
+      <%= f.check_box :delivery_port, class: "form-check-input" %>
+      <%= f.label :delivery_port, class: "form-check-label" %>
+    </div>
+  </div>
+
+  <div class="mb-0">
+    <%= f.check_box :archived, class: "form-check-input" %>
+    <%= f.label :archived, class: "form-check-label" %>
+  </div>
+<% end %>
