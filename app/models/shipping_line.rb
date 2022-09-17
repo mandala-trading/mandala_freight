@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Buyer < ApplicationRecord
+class ShippingLine < ApplicationRecord
   include UserTrackable
   include Archivable
   include Discardable

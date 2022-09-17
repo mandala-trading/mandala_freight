@@ -1,0 +1,61 @@
+<% provide(:page_title, "Shipping Line Details") %>
+<% provide(:page_header, "Shipping Line Details") %>
+
+<div class="page-card">
+  <div class="page-card-header">
+    <h3 class="m-0"><%= @shipping_line.name %></h3>
+  </div>
+
+  <div class="page-card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Short Name</td>
+            <td><%= @shipping_line.short_name %></td>
+          </tr>
+
+          <tr>
+            <td>Street Address</td>
+            <td><%= @shipping_line.street_address %></td>
+          </tr>
+
+          <tr>
+            <td>City</td>
+            <td><%= @shipping_line.city %></td>
+          </tr>
+
+          <tr>
+            <td>State</td>
+            <td><%= @shipping_line.state %></td>
+          </tr>
+
+          <tr>
+            <td>Country</td>
+            <td><%= details_link_using_modal("countries", @shipping_line.country, @shipping_line.country_name) %></td>
+          </tr>
+
+          <tr>
+            <td>Zip Code</td>
+            <td><%= @shipping_line.zip_code %></td>
+          </tr>
+
+          <tr>
+            <td>Risk Profile</td>
+            <td><%= @shipping_line.risk_profile.display %></td>
+          </tr>
+
+          <tr>
+            <td>Remarks</td>
+            <td><%= @shipping_line.remarks %></td>
+          </tr>
+
+          <tr>
+            <td>Status</td>
+            <td><%= @shipping_line.display_status %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

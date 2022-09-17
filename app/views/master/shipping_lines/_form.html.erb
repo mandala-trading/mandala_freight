@@ -1,0 +1,62 @@
+<%= render layout: "shared/form_modal_layout", locals: { resource: @shipping_line, namespace: "master" } do |f| %>
+  <div class="mb-3">
+    <%= f.label :name, class: "form-label required" %>
+    <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "form-control", required: true, maxlength: 250 %>
+    <%= render "shared/field_error_messages", resource: @shipping_line, key: :name %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :short_name, class: "form-label required" %>
+    <%= f.text_field :short_name, autofocus: true, placeholder: "Short Name", class: "form-control", required: true, maxlength: 50 %>
+    <%= render "shared/field_error_messages", resource: @shipping_line, key: :short_name %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :street_address, class: "form-label required" %>
+    <%= f.text_field :street_address, placeholder: "Street Address", class: "form-control", required: true, maxlength: 250 %>
+    <%= render "shared/field_error_messages", resource: @shipping_line, key: :street_address %>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-6 mb-3">
+      <%= f.label :city, class: "form-label required" %>
+      <%= f.text_field :city, placeholder: "City", class: "form-control", required: true, maxlength: 250 %>
+      <%= render "shared/field_error_messages", resource: @shipping_line, key: :city %>
+    </div>
+
+    <div class="col-12 col-md-6 mb-3">
+      <%= f.label :state, class: "form-label required" %>
+      <%= f.text_field :state, placeholder: "State", class: "form-control", required: true, maxlength: 250 %>
+      <%= render "shared/field_error_messages", resource: @shipping_line, key: :state %>
+    </div>
+
+    <div class="col-12 col-md-6 mb-3">
+      <%= f.label :country_id, "Country", class: "form-label required" %>
+      <%= f.select :country_id, country_list(@shipping_line.country_id), { prompt: "-- Select one country --" }, { class: "form-control", required: true } %>
+      <%= render "shared/field_error_messages", resource: @shipping_line, key: :country_id %>
+    </div>
+
+    <div class="col-12 col-md-6 mb-3">
+      <%= f.label :zip_code, class: "form-label required" %>
+      <%= f.text_field :zip_code, placeholder: "Zip Code", class: "form-control", required: true, maxlength: 50 %>
+      <%= render "shared/field_error_messages", resource: @shipping_line, key: :zip_code %>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :risk_profile, "Risk Profile", class: "form-label required" %>
+    <%= f.select :risk_profile, risk_profile_list, { prompt: "-- Select one option --" }, { class: "form-control", required: true } %>
+    <%= render "shared/field_error_messages", resource: @shipping_line, key: :risk_profile %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :remarks, class: "form-label" %>
+    <%= f.text_area :remarks, placeholder: "Remarks", class: "form-control", rows: 3 %>
+    <%= render "shared/field_error_messages", resource: @shipping_line, key: :remarks %>
+  </div>
+
+  <div class="mb-0">
+    <%= f.check_box :archived, class: "form-check-input" %>
+    <%= f.label :archived, class: "form-check-label" %>
+  </div>
+<% end %>
