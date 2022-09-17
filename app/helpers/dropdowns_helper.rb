@@ -2,7 +2,7 @@
 
 module DropdownsHelper
   def country_list(country_id)
-    dropdown_list = current_account.countries.non_archived.order_by_name.pluck(:name, :id)
+    dropdown_list = current_account.countries.kept.non_archived.order_by_name.pluck(:name, :id)
     country_ids = dropdown_list.map { |e| e[1] }
 
     if country_id && !country_ids.include?(country_id)
@@ -11,5 +11,9 @@ module DropdownsHelper
     end
 
     dropdown_list
+  end
+
+  def risk_profile_list
+    Buyer::RISK_PROFILES_LIST.map { |risk_profile| [risk_profile.display, risk_profile] }
   end
 end

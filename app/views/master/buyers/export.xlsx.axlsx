@@ -1,0 +1,28 @@
+# frozen_string_literal: true
+
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  header_style = style.add_style(bg_color: "EFC376", border: Axlsx::STYLE_THIN_BORDER)
+  row_style = style.add_style(border: Axlsx::STYLE_THIN_BORDER)
+
+  wb.add_worksheet(name: controller_name.display) do |sheet|
+    sheet.add_row ["Name", "Short Name", "Street Address", "City", "State", "Country",
+                   "Zip Code", "Risk Profile", "Remarks", "Status"], style: header_style
+
+    @buyers.each do |resource|
+      sheet.add_row [
+        resource.name,
+        resource.short_name,
+        resource.street_address,
+        resource.city,
+        resource.state,
+        resource.country_name,
+        resource.zip_code,
+        resource.risk_profile.display,
+        resource.remarks,
+        resource.display_status
+      ], style: row_style
+    end
+  end
+end

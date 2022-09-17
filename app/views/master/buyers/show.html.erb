@@ -1,0 +1,61 @@
+<% provide(:page_title, "Buyer Details") %>
+<% provide(:page_header, "Buyer Details") %>
+
+<div class="page-card">
+  <div class="page-card-header">
+    <h3 class="m-0"><%= @buyer.name %></h3>
+  </div>
+
+  <div class="page-card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Short Name</td>
+            <td><%= @buyer.short_name %></td>
+          </tr>
+
+          <tr>
+            <td>Street Address</td>
+            <td><%= @buyer.street_address %></td>
+          </tr>
+
+          <tr>
+            <td>City</td>
+            <td><%= @buyer.city %></td>
+          </tr>
+
+          <tr>
+            <td>State</td>
+            <td><%= @buyer.state %></td>
+          </tr>
+
+          <tr>
+            <td>Country</td>
+            <td><%= details_link_using_modal("countries", @buyer.country, @buyer.country_name) %></td>
+          </tr>
+
+          <tr>
+            <td>Zip Code</td>
+            <td><%= @buyer.zip_code %></td>
+          </tr>
+
+          <tr>
+            <td>Risk Profile</td>
+            <td><%= @buyer.risk_profile.display %></td>
+          </tr>
+
+          <tr>
+            <td>Remarks</td>
+            <td><%= @buyer.remarks %></td>
+          </tr>
+
+          <tr>
+            <td>Status</td>
+            <td><%= @buyer.display_status %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

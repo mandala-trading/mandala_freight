@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <% enabled_grid_option_keys.each do |key| %>
+          <%= generate_table_header(key) %>
+        <% end %>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @buyers.each do |buyer| %>
+        <tr>
+          <% enabled_grid_option_keys.each do |key| %>
+            <td><%= buyers_table_defination(key, buyer) %></td>
+          <% end %>
+          <td>
+            <div class="button-group">
+              <%= edit_link_using_modal(controller_name, buyer) %>
+              <%= delete_link(controller_name, buyer) if buyer.undiscarded? %>
+              <%= restore_link(controller_name, buyer) if buyer.discarded? %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
