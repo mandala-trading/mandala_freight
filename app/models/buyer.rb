@@ -8,15 +8,15 @@ class Buyer < ApplicationRecord
   RISK_PROFILES_LIST = %w[no_risk high_risk medium_risk low_risk].freeze
 
   INDEX_COLUMNS = {
-    name: { label: "Name", sortable: true, mandatory: true },
-    short_name: { label: "Short Name", sortable: true, mandatory: false },
-    street_address: { label: "Street Address", sortable: true, mandatory: false },
-    city: { label: "City", sortable: true, mandatory: false },
-    state: { label: "State", sortable: true, mandatory: false },
-    country: { label: "Country", sortable: true, mandatory: false },
-    zip_code: { label: "Zip Code", sortable: true, mandatory: false },
-    risk_profile: { label: "Risk Profile", sortable: true, mandatory: false },
-    status: { label: "Status", sortable: true, mandatory: false }
+    name: { label: "Name", sortable: true, sort_key: :name, mandatory: true },
+    short_name: { label: "Short Name", sortable: true, sort_key: :short_name, mandatory: false },
+    street_address: { label: "Street Address", sortable: true, sort_key: :street_address, mandatory: false },
+    city: { label: "City", sortable: true, sort_key: :city, mandatory: false },
+    state: { label: "State", sortable: true, sort_key: :state, mandatory: false },
+    country: { label: "Country", sortable: true, sort_key: :country_name, mandatory: false },
+    zip_code: { label: "Zip Code", sortable: true, sort_key: :zip_code, mandatory: false },
+    risk_profile: { label: "Risk Profile", sortable: true, sort_key: risk_profile, mandatory: false },
+    status: { label: "Status", sortable: true, sort_key: :status, mandatory: false }
   }.freeze
 
   enum risk_profile: RISK_PROFILES_LIST.to_h { |item| [item, item] }

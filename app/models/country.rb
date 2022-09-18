@@ -6,9 +6,9 @@ class Country < ApplicationRecord
   include Discardable
 
   INDEX_COLUMNS = {
-    name: { label: "Name", sortable: true, mandatory: true },
-    short_name: { label: "Short Name", sortable: true, mandatory: false },
-    status: { label: "Status", sortable: true, mandatory: false }
+    name: { label: "Name", sortable: true, sort_key: :name, mandatory: true },
+    short_name: { label: "Short Name", sortable: true, sort_key: :short_name, mandatory: false },
+    status: { label: "Status", sortable: true, sort_key: :status, mandatory: false }
   }.freeze
 
   strip_attributes only: %i[name short_name], collapse_spaces: true, replace_newlines: true
