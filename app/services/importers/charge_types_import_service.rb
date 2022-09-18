@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Importers
-  class PaymentTypesImportService < Importers::ImportService
+  class ChargeTypesImportService < Importers::ImportService
     protected
 
     def initialize_resource(data)
-      @current_account.payment_types.new(name: data[:name])
+      @current_account.charge_types.new(name: data[:name])
     end
 
     def error_csv_header
@@ -13,7 +13,7 @@ module Importers
     end
 
     def resources_name
-      "Payment types"
+      "Charge types"
     end
   end
 end

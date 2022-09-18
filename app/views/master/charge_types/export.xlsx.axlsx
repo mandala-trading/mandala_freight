@@ -7,12 +7,11 @@ wb.styles do |style|
   row_style = style.add_style(border: Axlsx::STYLE_THIN_BORDER)
 
   wb.add_worksheet(name: controller_name.display) do |sheet|
-    sheet.add_row ["Name", "Container Type", "Status"], style: header_style
+    sheet.add_row %w[Name Status], style: header_style
 
-    @units.each do |resource|
+    @charge_types.each do |resource|
       sheet.add_row [
         resource.name,
-        resource.container_type.display,
         resource.display_status
       ], style: row_style
     end

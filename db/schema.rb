@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_24_111805) do
+ActiveRecord::Schema.define(version: 2022_09_24_114005) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2022_09_24_111805) do
     t.integer "freight_items_count", default: 0, null: false
     t.integer "units_count", default: 0, null: false
     t.integer "payment_types_count", default: 0, null: false
+    t.integer "charge_types_count", default: 0, null: false
     t.integer "ports_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -50,6 +51,20 @@ ActiveRecord::Schema.define(version: 2022_09_24_111805) do
     t.index ["country_id"], name: "index_buyers_on_country_id"
     t.index ["created_by_id"], name: "index_buyers_on_created_by_id"
     t.index ["updated_by_id"], name: "index_buyers_on_updated_by_id"
+  end
+
+  create_table "charge_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", limit: 250, default: "", null: false
+    t.boolean "archived", default: false, null: false
+    t.bigint "account_id", null: false
+    t.datetime "discarded_at"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_charge_types_on_account_id"
+    t.index ["created_by_id"], name: "index_charge_types_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_charge_types_on_updated_by_id"
   end
 
   create_table "container_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -231,6 +246,7 @@ ActiveRecord::Schema.define(version: 2022_09_24_111805) do
 
   add_foreign_key "buyers", "accounts"
   add_foreign_key "buyers", "countries"
+  add_foreign_key "charge_types", "accounts"
   add_foreign_key "container_details", "accounts"
   add_foreign_key "countries", "accounts"
   add_foreign_key "currencies", "accounts"

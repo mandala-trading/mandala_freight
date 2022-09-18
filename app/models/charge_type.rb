@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PaymentType < ApplicationRecord
+class ChargeType < ApplicationRecord
   include UserTrackable
   include Archivable
   include Discardable
