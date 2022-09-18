@@ -1,0 +1,7 @@
+Name,City,Country,Loading Port,Transhipment Port,Discharge Port,Delivery Port
+Adelaide,Adelaide,Australia,Yes,No,Yes,Yes
+Fremantle,Fremantle,Australia,Yes,No,Yes,Yes
+Brisbane,Brisbane,Australia,Yes,No,Yes,Yes
+Melbourne,Melbourne,Australia,Yes,No,Yes,Yes
+Sydney,Sydney,Australia,Yes,No,Yes,Yes
+Paranagua,Brazil,Brazil,Yes,No,No,No

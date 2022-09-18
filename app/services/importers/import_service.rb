@@ -42,5 +42,17 @@ module Importers
     def import_limit
       (ENV["IMPORT_ROWS_LIMIT"].presence || 100).to_i
     end
+
+    def sanitize_flag(flag)
+      %w[yes true].include?(flag.to_s.strip.downcase)
+    end
+
+    def countries
+      @countries ||= @current_account.countries
+    end
+
+    def find_country(name)
+      countries.select { |c| c.name == name.to_s.strip }.first
+    end
   end
 end

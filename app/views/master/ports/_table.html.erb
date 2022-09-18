@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <% enabled_grid_option_keys.each do |key| %>
+          <%= generate_table_header(key) %>
+        <% end %>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @ports.each do |port| %>
+        <tr>
+          <% enabled_grid_option_keys.each do |key| %>
+            <td><%= ports_table_defination(key, port) %></td>
+          <% end %>
+          <td>
+            <div class="button-group">
+              <%= edit_link_using_modal(controller_name, port) %>
+              <%= delete_link(controller_name, port) if port.undiscarded? %>
+              <%= restore_link(controller_name, port) if port.discarded? %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

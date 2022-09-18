@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "string"
+require "true_class"
+require "false_class"
 
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
