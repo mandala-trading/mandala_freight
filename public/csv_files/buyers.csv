@@ -1,0 +1,7 @@
+Name,Short Name,Street Address,City,State,Country,Zip Code,Risk Profile,Remarks
+ACME Crop 1,ACME1,10 Downing Street,Waterloo,New South Wales,Australia,123456,No Risk,Dummy Remarks
+ACME Crop 2,ACME2,11 Downing Street,Waterloo,New South Wales,Australia,123456,High Risk,Dummy Remarks
+ACME Crop 3,ACME3,12 Downing Street,Waterloo,New South Wales,Australia,123456,Medium Risk,Dummy Remarks
+ACME Crop 4,ACME4,13 Downing Street,Waterloo,New South Wales,Australia,123456,Low Risk,Dummy Remarks
+
+N.B.: Risk Profile column allows only "no_risk"/"high_risk"/"medium_risk"/"low_risk" values.

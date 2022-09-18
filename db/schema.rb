@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_13_153139) do
+ActiveRecord::Schema.define(version: 2022_09_17_124733) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
@@ -18,9 +18,33 @@ ActiveRecord::Schema.define(version: 2022_09_13_153139) do
     t.integer "users_count", default: 0, null: false
     t.integer "countries_count", default: 0, null: false
     t.integer "currencies_count", default: 0, null: false
+    t.integer "buyers_count", default: 0, null: false
     t.integer "ports_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "buyers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", limit: 250, default: "", null: false
+    t.string "short_name", limit: 50, default: "", null: false
+    t.string "street_address", limit: 250, default: "", null: false
+    t.string "city", limit: 250, default: "", null: false
+    t.string "state", limit: 250, default: "", null: false
+    t.string "zip_code", limit: 50, default: "", null: false
+    t.column "risk_profile", "enum('no_risk','high_risk','medium_risk','low_risk')", default: "no_risk"
+    t.text "remarks"
+    t.boolean "archived", default: false, null: false
+    t.bigint "country_id", null: false
+    t.bigint "account_id", null: false
+    t.datetime "discarded_at"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_buyers_on_account_id"
+    t.index ["country_id"], name: "index_buyers_on_country_id"
+    t.index ["created_by_id"], name: "index_buyers_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_buyers_on_updated_by_id"
   end
 
   create_table "countries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -69,12 +93,12 @@ ActiveRecord::Schema.define(version: 2022_09_13_153139) do
   create_table "ports", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, null: false
     t.string "city", limit: 250, null: false
-    t.bigint "country_id", null: false
     t.boolean "loading_port", default: false, null: false
     t.boolean "transhipment_port", default: false, null: false
     t.boolean "discharge_port", default: false, null: false
     t.boolean "delivery_port", default: false, null: false
     t.boolean "archived", default: false, null: false
+    t.bigint "country_id", null: false
     t.bigint "account_id", null: false
     t.datetime "discarded_at"
     t.bigint "created_by_id"
@@ -119,6 +143,8 @@ ActiveRecord::Schema.define(version: 2022_09_13_153139) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "buyers", "accounts"
+  add_foreign_key "buyers", "countries"
   add_foreign_key "countries", "accounts"
   add_foreign_key "currencies", "accounts"
   add_foreign_key "page_settings", "users"

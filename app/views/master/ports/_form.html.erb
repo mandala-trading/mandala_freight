@@ -12,8 +12,8 @@
   </div>
 
   <div class="mb-3">
-    <%= f.label :country_id, "Country", class: "form-label" %>
-    <%= f.select :country_id, country_list(@port.country_id), { prompt: "-- Select one country --" }, { class: "form-control" } %>
+    <%= f.label :country_id, "Country", class: "form-label required" %>
+    <%= f.select :country_id, country_list(@port.country_id), { prompt: "-- Select one country --" }, { class: "form-control", required: true } %>
     <%= render "shared/field_error_messages", resource: @port, key: :country_id %>
   </div>
 

@@ -47,6 +47,10 @@ module Importers
       %w[yes true].include?(flag.to_s.strip.downcase)
     end
 
+    def sanitize_risk_profile(risk_profile)
+      risk_profile.to_s.strip.downcase.split.join("_")
+    end
+
     def countries
       @countries ||= @current_account.countries
     end

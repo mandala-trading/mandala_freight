@@ -26,4 +26,10 @@ module LinksHelper
             class: "btn btn-light btn-sm",
             title: "Restore #{controller_name.singular_display}"
   end
+
+  def details_link(controller_name, resource, link_title)
+    link_to link_title,
+            url_for(controller: controller_name, action: "show", id: resource.id),
+            title: "Show #{controller_name.singular_display}"
+  end
 end
