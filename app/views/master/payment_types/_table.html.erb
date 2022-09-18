@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <% enabled_grid_option_keys.each do |key| %>
+          <%= generate_table_header(key) %>
+        <% end %>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @payment_types.each do |payment_type| %>
+        <tr>
+          <% enabled_grid_option_keys.each do |key| %>
+            <td><%= payment_types_table_defination(key, payment_type) %></td>
+          <% end %>
+          <td>
+            <div class="button-group">
+              <%= edit_link_using_modal(controller_name, payment_type) %>
+              <%= delete_link(controller_name, payment_type) if payment_type.undiscarded? %>
+              <%= restore_link(controller_name, payment_type) if payment_type.discarded? %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
