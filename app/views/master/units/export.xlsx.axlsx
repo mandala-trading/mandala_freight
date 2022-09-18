@@ -1,0 +1,20 @@
+# frozen_string_literal: true
+
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  header_style = style.add_style(bg_color: "EFC376", border: Axlsx::STYLE_THIN_BORDER)
+  row_style = style.add_style(border: Axlsx::STYLE_THIN_BORDER)
+
+  wb.add_worksheet(name: controller_name.display) do |sheet|
+    sheet.add_row %w[Name Container\ Type Status], style: header_style
+
+    @units.each do |resource|
+      sheet.add_row [
+        resource.name,
+        resource.container_type.display,
+        resource.display_status
+      ], style: row_style
+    end
+  end
+end

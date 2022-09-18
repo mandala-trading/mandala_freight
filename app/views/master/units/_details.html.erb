@@ -1,0 +1,22 @@
+<%= render layout: "shared/details_modal_layout", locals: { resource: @unit } do |f| %>
+  <div class="table-responsive">
+    <table class="table details-table">
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td><%= @unit.name %></td>
+        </tr>
+
+        <tr>
+          <td>Container Type</td>
+          <td><%= @unit.container_type.display %></td>
+        </tr>
+
+        <tr>
+          <td>Status</td>
+          <td><%= @unit.display_status %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>
