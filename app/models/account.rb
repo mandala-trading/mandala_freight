@@ -8,6 +8,7 @@ class Account < ApplicationRecord
   has_many :currencies, dependent: :destroy
   has_many :ports, dependent: :destroy
   has_many :buyers, dependent: :destroy
+  has_many :shipping_lines, dependent: :destroy
   has_many :container_details, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 250 }

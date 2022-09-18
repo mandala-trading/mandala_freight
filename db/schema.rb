@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_18_043906) do
+ActiveRecord::Schema.define(version: 2022_09_18_063906) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2022_09_18_043906) do
     t.integer "currencies_count", default: 0, null: false
     t.integer "buyers_count", default: 0, null: false
     t.integer "container_details_count", default: 0, null: false
+    t.integer "shipping_lines_count", default: 0, null: false
     t.integer "ports_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -127,6 +128,29 @@ ActiveRecord::Schema.define(version: 2022_09_18_043906) do
     t.index ["updated_by_id"], name: "index_ports_on_updated_by_id"
   end
 
+  create_table "shipping_lines", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", limit: 250, default: "", null: false
+    t.string "short_name", limit: 50, default: "", null: false
+    t.string "street_address", limit: 250, default: "", null: false
+    t.string "city", limit: 250, default: "", null: false
+    t.string "state", limit: 250, default: "", null: false
+    t.string "zip_code", limit: 50, default: "", null: false
+    t.column "risk_profile", "enum('no_risk','high_risk','medium_risk','low_risk')", default: "no_risk"
+    t.text "remarks"
+    t.boolean "archived", default: false, null: false
+    t.bigint "country_id", null: false
+    t.bigint "account_id", null: false
+    t.datetime "discarded_at"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_shipping_lines_on_account_id"
+    t.index ["country_id"], name: "index_shipping_lines_on_country_id"
+    t.index ["created_by_id"], name: "index_shipping_lines_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_shipping_lines_on_updated_by_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "first_name", limit: 250, default: "", null: false
     t.string "last_name", limit: 250, default: "", null: false
@@ -167,5 +191,7 @@ ActiveRecord::Schema.define(version: 2022_09_18_043906) do
   add_foreign_key "page_settings", "users"
   add_foreign_key "ports", "accounts"
   add_foreign_key "ports", "countries"
+  add_foreign_key "shipping_lines", "accounts"
+  add_foreign_key "shipping_lines", "countries"
   add_foreign_key "users", "accounts"
 end

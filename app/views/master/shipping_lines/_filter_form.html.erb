@@ -1,0 +1,16 @@
+<%= render layout: "shared/filter_modal_layout", locals: { filter_path: master_shipping_lines_path } do |f| %>
+  <div class="mb-3">
+    <%= f.label :country_id_eq, "Country", class: "form-label" %>
+    <%= f.select :country_id_eq, country_filter_list, { include_blank: true, prompt: "-- Select one country --" }, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :risk_profile_eq, "Risk Profile", class: "form-label" %>
+    <%= f.select :risk_profile_eq, risk_profile_list, { include_blank: true, prompt: "-- Select one risk profile --" }, { class: "form-control" } %>
+  </div>
+
+  <div class="mb-0">
+    <%= f.label :archived_eq, "Status", class: "form-label" %>
+    <%= f.select :archived_eq, status_filter_list, { include_blank: true, prompt: "-- Select one status --" }, { class: "form-control" } %>
+  </div>
+<% end %>

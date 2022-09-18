@@ -1,0 +1,36 @@
+<% provide(:page_title, "Shipping Lines") %>
+<% provide(:page_header, "Shipping Lines") %>
+<% provide(:page_settings, true) %>
+<% provide(:filter_settings, true) %>
+
+<div class="page-card">
+  <div class="page-card-header">
+    <%= render "shared/search_form", path: master_shipping_lines_path, search_key: :name_or_short_name_i_cont, title_text: "Search with name or short name" %>
+
+    <div class="button-group">
+      <%= new_link_using_modal(controller_name) %>
+      <%= filter_link_using_modal(controller_name) %>
+
+      <div class="dropdown action-dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-three-dots-vertical"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><%= export_link(controller_name) %></li>
+          <li><%= import_link_using_modal(controller_name) %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-card-body">
+    <% if @shipping_lines.present? %>
+      <%= render "table" %>
+      <%= render "shared/pagy" %>
+    <% else %>
+      <%= render "shared/empty_record" %>
+    <% end %>
+  </div>
+</div>
+
+<%= render "shared/import_modal" %>
