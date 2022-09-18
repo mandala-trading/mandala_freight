@@ -26,7 +26,7 @@ module Importers
     end
 
     def resources_name
-      "buyers"
+      "Buyers"
     end
   end
 end

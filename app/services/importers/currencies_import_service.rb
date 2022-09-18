@@ -13,7 +13,7 @@ module Importers
     end
 
     def resources_name
-      "currencies"
+      "Currencies"
     end
   end
 end

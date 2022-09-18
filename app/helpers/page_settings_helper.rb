@@ -10,10 +10,12 @@ module PageSettingsHelper
   end
 
   def generate_table_header(key)
-    if all_index_columns[key][:sortable]
-      content_tag("th", sort_link(@search, key, all_index_columns[key][:label]), scope: "col")
+    column_def = all_index_columns[key]
+
+    if column_def[:sortable]
+      content_tag("th", sort_link(@search, column_def[:sort_key], column_def[:label]), scope: "col")
     else
-      content_tag("th", all_index_columns[key][:label], scope: "col")
+      content_tag("th", column_def[:label], scope: "col")
     end
   end
 end

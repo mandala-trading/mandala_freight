@@ -1,0 +1,17 @@
+<%= render layout: "shared/details_modal_layout", locals: { resource: @container_detail } do |f| %>
+  <div class="table-responsive">
+    <table class="table details-table">
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td><%= @container_detail.name %></td>
+        </tr>
+
+        <tr>
+          <td>Description</td>
+          <td><%= @container_detail.description %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>
