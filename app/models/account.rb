@@ -10,6 +10,7 @@ class Account < ApplicationRecord
   has_many :buyers, dependent: :destroy
   has_many :shipping_lines, dependent: :destroy
   has_many :container_details, dependent: :destroy
+  has_many :freight_items, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 250 }
   validates :time_zone, presence: true, length: { maximum: 50 }

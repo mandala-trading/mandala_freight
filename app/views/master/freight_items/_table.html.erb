@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <% enabled_grid_option_keys.each do |key| %>
+          <%= generate_table_header(key) %>
+        <% end %>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @freight_items.each do |freight_item| %>
+        <tr>
+          <% enabled_grid_option_keys.each do |key| %>
+            <td><%= freight_items_table_defination(key, freight_item) %></td>
+          <% end %>
+          <td>
+            <div class="button-group">
+              <%= edit_link_using_modal(controller_name, freight_item) %>
+              <%= delete_link(controller_name, freight_item) if freight_item.undiscarded? %>
+              <%= restore_link(controller_name, freight_item) if freight_item.discarded? %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

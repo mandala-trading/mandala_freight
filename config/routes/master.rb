@@ -24,5 +24,6 @@ Rails.application.routes.draw do
     resources :buyers,            concerns: %i[exportable importable filterable restorable]
     resources :container_details, concerns: %i[exportable importable filterable restorable]
     resources :shipping_lines,    concerns: %i[exportable importable filterable restorable]
+    resources :freight_items,     concerns: %i[exportable importable filterable restorable]
   end
 end
