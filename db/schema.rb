@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_24_102805) do
+ActiveRecord::Schema.define(version: 2022_09_24_110405) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_09_24_102805) do
     t.integer "container_details_count", default: 0, null: false
     t.integer "shipping_lines_count", default: 0, null: false
     t.integer "freight_items_count", default: 0, null: false
+    t.integer "units_count", default: 0, null: false
     t.integer "ports_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -166,6 +167,21 @@ ActiveRecord::Schema.define(version: 2022_09_24_102805) do
     t.index ["updated_by_id"], name: "index_shipping_lines_on_updated_by_id"
   end
 
+  create_table "units", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", limit: 250, default: "", null: false
+    t.boolean "container_type", default: false, null: false
+    t.boolean "archived", default: false, null: false
+    t.bigint "account_id", null: false
+    t.datetime "discarded_at"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_units_on_account_id"
+    t.index ["created_by_id"], name: "index_units_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_units_on_updated_by_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "first_name", limit: 250, default: "", null: false
     t.string "last_name", limit: 250, default: "", null: false
@@ -209,5 +225,6 @@ ActiveRecord::Schema.define(version: 2022_09_24_102805) do
   add_foreign_key "ports", "countries"
   add_foreign_key "shipping_lines", "accounts"
   add_foreign_key "shipping_lines", "countries"
+  add_foreign_key "units", "accounts"
   add_foreign_key "users", "accounts"
 end
