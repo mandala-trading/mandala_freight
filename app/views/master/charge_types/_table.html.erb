@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <% enabled_grid_option_keys.each do |key| %>
+          <%= generate_table_header(key) %>
+        <% end %>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @charge_types.each do |charge_type| %>
+        <tr>
+          <% enabled_grid_option_keys.each do |key| %>
+            <td><%= charge_types_table_defination(key, charge_type) %></td>
+          <% end %>
+          <td>
+            <div class="button-group">
+              <%= edit_link_using_modal(controller_name, charge_type) %>
+              <%= delete_link(controller_name, charge_type) if charge_type.undiscarded? %>
+              <%= restore_link(controller_name, charge_type) if charge_type.discarded? %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
