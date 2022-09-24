@@ -1,0 +1,6 @@
+<%= render layout: "shared/filter_modal_layout", locals: { filter_path: master_freight_items_path } do |f| %>
+  <div class="mb-0">
+    <%= f.label :archived_eq, "Status", class: "form-label" %>
+    <%= f.select :archived_eq, status_filter_list, { include_blank: true, prompt: "-- Select one status --" }, { class: "form-control" } %>
+  </div>
+<% end %>

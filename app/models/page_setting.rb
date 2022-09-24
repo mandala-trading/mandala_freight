@@ -2,8 +2,8 @@
 
 class PageSetting < ApplicationRecord
   MODULE_NAMES = %w[master_countries master_currencies master_ports master_buyers master_container_details
-                    master_shipping_lines].freeze
-  MODULE_CLASSES = %w[Country Currency Port Buyer ContainerDetail ShippingLine].freeze
+                    master_shipping_lines master_freight_items].freeze
+  MODULE_CLASSES = %w[Country Currency Port Buyer ContainerDetail ShippingLine FreightItem].freeze
 
   before_validation :set_column_settings, on: :create
 
