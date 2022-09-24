@@ -16,6 +16,8 @@ class FreightItem < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 250 }, uniqueness: { case_sensitive: false, scope: :account_id }
 
+  scope :order_by_name, -> { order(:name) }
+
   def display_status
     discarded? ? I18n.t("status.deleted") : archived_status
   end
