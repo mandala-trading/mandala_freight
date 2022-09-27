@@ -5,8 +5,6 @@
 
 <%= form_for @page_setting, remote: true do |f| %>
   <div class="modal-body">
-    <%= render partial: "shared/error_messages", locals: { resource: @page_setting } %>
-
     <div class="mb-3">
       <%= f.label :page_items, class: "form-label required" %>
       <%= f.number_field :page_items, autofocus: true, placeholder: "Page Items Count", class: "form-control", required: true, step: 1, min: 5, max: 50 %>

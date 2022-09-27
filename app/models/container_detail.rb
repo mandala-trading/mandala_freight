@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ContainerDetail < ApplicationRecord
+  include QuickSearchable::ContainerDetail
   include UserTrackable
   include Archivable
   include Discardable
@@ -19,6 +20,10 @@ class ContainerDetail < ApplicationRecord
   validates :description, presence: true, length: { maximum: 250 }
 
   scope :order_by_name, -> { order(:name) }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[quick_search]
+  end
 
   def display_status
     discarded? ? I18n.t("status.deleted") : archived_status

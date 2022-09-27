@@ -1,16 +1,14 @@
-<div class="modal-header">
-  <h5 class="modal-title" id="formModalLabel"><%= "Filter #{controller_name.display}" %></h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="offcanvas-header">
+  <h5 class="offcanvas-title" id="offcanvasModalLabel"><%= "Filter #{controller_name.display}" %></h5>
+  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 </div>
 
 <%= search_form_for @search, url: filter_path, class: "filter-form" do |f| %>
-  <div class="modal-body">
+  <div class="offcanvas-body">
     <%= yield f %>
   </div>
-  <div class="modal-footer">
-    <div class="button-group">
-      <%= link_to "Remove Filter", filter_path, class: "btn btn-light", title: "Remove Filter"%>
-      <%= f.submit "Filter", class: "btn btn-primary", title: "Filter #{controller_name.display}" %>
-    </div>
+  <div class="offcanvas-footer">
+    <%= link_to "Remove Filters", filter_path, class: "btn btn-light", title: "Remove Filters"%>
+    <%= f.submit "Filter", class: "btn btn-primary", title: "Filter #{controller_name.display}" %>
   </div>
 <% end %>

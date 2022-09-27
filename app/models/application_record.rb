@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "array"
 require "string"
 require "true_class"
 require "false_class"

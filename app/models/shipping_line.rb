@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ShippingLine < ApplicationRecord
+  include QuickSearchable::ShippingLine
   include UserTrackable
   include Archivable
   include Discardable
@@ -38,6 +39,10 @@ class ShippingLine < ApplicationRecord
   validates :risk_profile, presence: true, inclusion: { in: RISK_PROFILES_LIST }
 
   scope :order_by_name, -> { order(:name) }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[quick_search]
+  end
 
   def display_status
     discarded? ? I18n.t("status.deleted") : archived_status

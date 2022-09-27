@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :page_settings, only: %i[edit update]
+  resources :filter_options, only: %i[new create]
 
   root "home#index"
   get  "/dashboard", to: "home#dashboard"

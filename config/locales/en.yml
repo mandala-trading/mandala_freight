@@ -38,3 +38,13 @@ en:
   email_subjects:
     data_import_success: "%{module_name} Imported"
     data_import_failure: "%{module_name} Partially Imported"
+
+  applied_filters:
+    country: "Country - %{names}"
+    risk_profile: "Risk Profile - %{names}"
+    archived: "Status - %{names}"
+    loading_port: "Loading Port - %{names}"
+    transhipment_port: "Transhipment Port - %{names}"
+    discharge_port: "Discharge Port - %{names}"
+    delivery_port: "Delivery Port - %{names}"
+    container_type: "Container Type - %{names}"

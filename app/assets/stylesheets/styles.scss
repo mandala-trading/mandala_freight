@@ -130,3 +130,19 @@
     font-family: "AribauGroteskMedium";
   }
 }
+
+.applied-filters {
+  margin-bottom: 10px;
+
+  .header {
+    font-family: "AribauGroteskMedium";
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $grey-color;
+    font-size: 14px;
+  }
+
+  .filter-options {
+    color: $grey-color;
+  }
+}

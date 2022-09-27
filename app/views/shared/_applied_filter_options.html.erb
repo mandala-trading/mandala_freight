@@ -1,0 +1,16 @@
+<% if applied_filters.present? %>
+  <div class="applied-filters mb-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="header">Applied Filters:</span>
+
+      <div class="button-group">
+        <%= link_to "Clear", clear_path, title: "Clear applied filters", class: "btn btn-light btn-sm" %>
+        <%= link_to "Save", new_filter_option_path(page_setting_constant.merge(filters: applied_filters)), remote: true, title: "Save applied filters", class: "btn btn-primary btn-sm" %>
+      </div>
+    </div>
+
+    <div class="filter-options">
+      <%= display_applied_filters %>
+    </div>
+  </div>
+<% end %>

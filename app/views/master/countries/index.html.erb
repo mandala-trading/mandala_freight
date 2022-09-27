@@ -5,7 +5,7 @@
 
 <div class="page-card">
   <div class="page-card-header">
-    <%= render "shared/search_form", path: master_countries_path, search_key: :name_or_short_name_i_cont, title_text: "Search with name or short name" %>
+    <%= render "shared/quick_search_form", path: master_countries_path %>
 
     <div class="button-group">
       <%= new_link_using_modal(controller_name) %>
@@ -24,6 +24,8 @@
   </div>
 
   <div class="page-card-body">
+    <%= render "shared/applied_filter_options", clear_path: master_countries_path %>
+
     <% if @countries.present? %>
       <%= render "table" %>
       <%= render "shared/pagy" %>
