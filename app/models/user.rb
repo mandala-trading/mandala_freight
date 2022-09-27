@@ -15,6 +15,7 @@ class User < ApplicationRecord
   belongs_to :account, counter_cache: true
 
   has_many :page_settings, dependent: :destroy
+  has_many :filter_options, dependent: :destroy
 
   validates :first_name, :last_name, :email, presence: true, length: { maximum: 250 }
 

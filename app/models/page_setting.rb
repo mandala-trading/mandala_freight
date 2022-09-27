@@ -14,7 +14,8 @@ class PageSetting < ApplicationRecord
   validates :module_name, presence: true, length: { maximum: 250 },
                           uniqueness: { case_sensitive: false, scope: :user_id }, inclusion: { in: MODULE_NAMES }
   validates :module_class, presence: true, length: { maximum: 250 },
-                           uniqueness: { case_sensitive: false, scope: :module_name }, inclusion: { in: MODULE_CLASSES }
+                           uniqueness: { case_sensitive: false, scope: %i[module_name user_id] },
+                           inclusion: { in: MODULE_CLASSES }
   validates :page_items, presence: true, numericality: { only_integer: true, in: [5..50] }
   validates :column_settings, presence: true
   validates :hide_deleted_records, inclusion: { in: [true, false] }

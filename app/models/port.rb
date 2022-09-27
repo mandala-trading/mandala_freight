@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Port < ApplicationRecord
+  include QuickSearchable::Port
   include UserTrackable
   include Archivable
   include Discardable
@@ -29,6 +30,10 @@ class Port < ApplicationRecord
   validates :loading_port, :transhipment_port, :discharge_port, :delivery_port, inclusion: { in: [true, false] }
 
   scope :order_by_name, -> { order(:name) }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[quick_search]
+  end
 
   def display_status
     discarded? ? I18n.t("status.deleted") : archived_status

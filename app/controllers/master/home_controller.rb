@@ -5,5 +5,7 @@ module Master
     before_action :authenticate_user!
     before_action { breadcrumbs.add "Master", nil }
     before_action { active_sidebar_item_option("master") }
+
+    helper_method :page_setting_constant
   end
 end

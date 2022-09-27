@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ChargeType < ApplicationRecord
+  include QuickSearchable::ChargeType
   include UserTrackable
   include Archivable
   include Discardable
@@ -17,6 +18,10 @@ class ChargeType < ApplicationRecord
   validates :name, presence: true, length: { maximum: 250 }, uniqueness: { case_sensitive: false, scope: :account_id }
 
   scope :order_by_name, -> { order(:name) }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[quick_search]
+  end
 
   def display_status
     discarded? ? I18n.t("status.deleted") : archived_status

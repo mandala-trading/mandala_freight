@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Unit < ApplicationRecord
+  include QuickSearchable::Unit
   include UserTrackable
   include Archivable
   include Discardable
@@ -19,6 +20,10 @@ class Unit < ApplicationRecord
   validates :container_type, inclusion: { in: [true, false] }
 
   scope :order_by_name, -> { order(:name) }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[quick_search]
+  end
 
   def display_status
     discarded? ? I18n.t("status.deleted") : archived_status

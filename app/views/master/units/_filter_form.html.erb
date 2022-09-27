@@ -1,6 +1,6 @@
 <%= render layout: "shared/filter_modal_layout", locals: { filter_path: master_units_path } do |f| %>
   <div class="mb-3">
-    <%= f.label :container_type_eq, "Loading Port", class: "form-label" %>
+    <%= f.label :container_type_eq, "Container Type", class: "form-label" %>
     <%= f.select :container_type_eq, container_type_flag_filter_list, { include_blank: true, prompt: "-- Select one flag --" }, { class: "form-control" } %>
   </div>
 

@@ -26,3 +26,16 @@
   padding: 10px 25px 25px;
   border: 0;
 }
+
+.offcanvas-body {
+  height: calc(100vh - 120px);
+}
+
+.offcanvas-footer {
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 58px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

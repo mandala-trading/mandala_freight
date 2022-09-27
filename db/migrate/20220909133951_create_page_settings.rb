@@ -8,7 +8,7 @@ class CreatePageSettings < ActiveRecord::Migration[6.1]
       t.boolean    :hide_deleted_records, null: false, default: true
       t.references :user,                 null: false, foreign_key: true
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

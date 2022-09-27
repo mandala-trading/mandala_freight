@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="formModalLabel">Save Filters</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<%= form_for @filter_option, remote: true do |f| %>
+  <%= f.hidden_field :module_class, value: @filter_option.module_class %>
+  <%= f.hidden_field :module_name, value: @filter_option.module_name %>
+  <%= f.hidden_field :filters, value: @filter_option.filters.to_json %>
+
+  <div class="modal-body">
+    <div class="mb-3">
+      <%= f.label :name, class: "form-label required" %>
+      <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "form-control", required: true, maxlength: 250 %>
+      <%= render "shared/field_error_messages", resource: @filter_option, key: :name %>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="button-group">
+      <button type="button" class="btn btn-light" data-bs-dismiss="modal" title="Close">Close</button>
+      <%= f.submit "Save", class: "btn btn-primary", title: "Save" %>
+    </div>
+  </div>
+<% end %>
