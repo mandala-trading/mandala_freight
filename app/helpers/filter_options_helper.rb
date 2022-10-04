@@ -47,6 +47,13 @@ module FilterOptionsHelper
       t("applied_filters.container_type", names: boolean_filter_options(value))
     when "archived_eq"
       t("applied_filters.archived", names: archived_filter_options(value))
+    when "s"
+      t("applied_filters.sort_option", names: get_sort_value(value))
     end
+  end
+
+  def get_sort_value(value)
+    attr, option = value.split
+    "#{t("sort_attributes.#{attr}")} » #{option.capitalize}"
   end
 end
