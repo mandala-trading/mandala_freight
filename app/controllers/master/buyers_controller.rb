@@ -91,7 +91,7 @@ module Master
       @buyer ||= current_account.buyers.find(params[:id])
     end
 
-    def page_setting_constant
+    def page_constant
       { module_name: "master_buyers", module_class: "Buyer" }
     end
 

@@ -92,7 +92,7 @@ module Master
       @payment_type ||= current_account.payment_types.find(params[:id])
     end
 
-    def page_setting_constant
+    def page_constant
       { module_name: "master_payment_types", module_class: "PaymentType" }
     end
   end

@@ -99,7 +99,7 @@ module Master
       @container_detail ||= current_account.container_details.find(params[:id])
     end
 
-    def page_setting_constant
+    def page_constant
       { module_name: "master_container_details", module_class: "ContainerDetail" }
     end
   end

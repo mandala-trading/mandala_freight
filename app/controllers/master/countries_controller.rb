@@ -90,7 +90,7 @@ module Master
       @country ||= current_account.countries.find(params[:id])
     end
 
-    def page_setting_constant
+    def page_constant
       { module_name: "master_countries", module_class: "Country" }
     end
   end

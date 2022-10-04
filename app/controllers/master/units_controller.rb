@@ -92,7 +92,7 @@ module Master
       @unit ||= current_account.units.find(params[:id])
     end
 
-    def page_setting_constant
+    def page_constant
       { module_name: "master_units", module_class: "Unit" }
     end
   end

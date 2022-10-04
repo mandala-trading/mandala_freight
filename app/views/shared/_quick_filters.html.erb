@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="formModalLabel">Quick Filters</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+  <%= render "shared/flash_message" %>
+
+  <% if @filter_options.present? %>
+    <% @filter_options.each do |filter_option| %>
+      <div class="custom-switch-container mb-2" id="filter_option_<%= filter_option.id %>">
+        <span><%= filter_option.name %></span>
+        <%= link_to filter_option_path(filter_option), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete the filter option?" }, class: "text-danger", title: "Delete filter option" do %>
+          <i class="bi bi-trash3-fill"></i>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <%= render "shared/empty_record" %>
+  <% end %>
+</div>
+
+<div class="modal-footer">
+  <div class="button-group">
+    <button type="button" class="btn btn-light" data-bs-dismiss="modal" title="Close">Close</button>
+  </div>
+</div>

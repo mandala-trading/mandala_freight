@@ -19,8 +19,12 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :email, presence: true, length: { maximum: 250 }
 
-  def find_page_setting(find_page_setting)
-    page_settings.find_by(find_page_setting) || page_settings.create(find_page_setting)
+  def find_page_setting(page_constant)
+    page_settings.find_by(page_constant) || page_settings.create(page_constant)
+  end
+
+  def find_filter_options(page_constant)
+    filter_options.search_by_page(page_constant).order_by_name
   end
 
   def initial

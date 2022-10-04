@@ -21,10 +21,21 @@ class FilterOptionsController < ApplicationController
     end
   end
 
+  def destroy
+    filter_option.destroy
+    @filter_options = current_user.find_filter_options(filter_option.page_constant)
+    flash.now[:danger] = t("flash_messages.deleted", name: "Filter option")
+    render "shared/quick_filters"
+  end
+
   private
 
   def filter_option_params
     params.require(:filter_option).permit(:name, :module_class, :module_name, :filters)
+  end
+
+  def filter_option
+    @filter_option ||= current_user.filter_options.find(params[:id])
   end
 
   def redirection_url

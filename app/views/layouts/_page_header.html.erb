@@ -10,7 +10,7 @@
 
     <div class="right-section">
       <% if yield(:filter_settings).to_bool %>
-        <%= link_to "#", class: "header-icon-link margin-left-10", title: "Filter settings" do %>
+        <%= link_to url_for(controller: controller_name, action: "quick_filters"), remote: true, class: "header-icon-link margin-left-10", title: "Filter settings" do %>
           <i class="bi bi-funnel-fill"></i>
         <% end %>
       <% end %>
