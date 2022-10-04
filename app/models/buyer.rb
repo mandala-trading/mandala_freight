@@ -6,7 +6,8 @@ class Buyer < ApplicationRecord
   include Archivable
   include Discardable
 
-  RISK_PROFILES_LIST = %w[no_risk high_risk medium_risk low_risk].freeze
+  # Do not change the order of risk profiles
+  RISK_PROFILES_LIST = %w[no_risk low_risk medium_risk high_risk].freeze
 
   INDEX_COLUMNS = {
     name: { label: "Name", sortable: true, sort_key: :name, mandatory: true },
