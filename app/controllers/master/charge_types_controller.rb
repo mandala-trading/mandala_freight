@@ -92,7 +92,7 @@ module Master
       @charge_type ||= current_account.charge_types.find(params[:id])
     end
 
-    def page_setting_constant
+    def page_constant
       { module_name: "master_charge_types", module_class: "ChargeType" }
     end
   end

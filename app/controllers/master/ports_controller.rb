@@ -91,7 +91,7 @@ module Master
       @port ||= current_account.ports.find(params[:id])
     end
 
-    def page_setting_constant
+    def page_constant
       { module_name: "master_ports", module_class: "Port" }
     end
 

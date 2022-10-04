@@ -15,7 +15,14 @@ class FilterOption < ApplicationRecord
                    uniqueness: { case_sensitive: false, scope: %i[module_name module_class user_id] }
   validates :filters, presence: true
 
+  scope :search_by_page, ->(options) { where(options) }
+  scope :order_by_name, -> { order(:name) }
+
   def filter_string
     JSON.parse(filters).map { |k, v| "q[#{k}]=#{v}" }.join("&")
+  end
+
+  def page_constant
+    { module_name:, module_class: }
   end
 end

@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_current_user, unless: :devise_controller?
 
+  helper_method :page_constant
+
   protected
 
   def configure_permitted_parameters
@@ -18,8 +20,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name])
   end
 
+  def page_constant
+    {}
+  end
+
   def page_setting
-    @page_setting ||= current_user.find_page_setting(page_setting_constant)
+    @page_setting ||= current_user.find_page_setting(page_constant)
   end
 
   def active_sidebar_item_option(option)

@@ -93,7 +93,7 @@ module Master
       @shipping_line ||= current_account.shipping_lines.find(params[:id])
     end
 
-    def page_setting_constant
+    def page_constant
       { module_name: "master_shipping_lines", module_class: "ShippingLine" }
     end
 

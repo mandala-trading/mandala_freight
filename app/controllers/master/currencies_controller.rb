@@ -90,7 +90,7 @@ module Master
       @currency ||= current_account.currencies.find(params[:id])
     end
 
-    def page_setting_constant
+    def page_constant
       { module_name: "master_currencies", module_class: "Currency" }
     end
   end
