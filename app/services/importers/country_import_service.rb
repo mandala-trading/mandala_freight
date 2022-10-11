@@ -11,9 +11,5 @@ module Importers
     def error_csv_header
       ["Name", "Short Name", "Error Message"]
     end
-
-    def resources_name
-      "Countries"
-    end
   end
 end

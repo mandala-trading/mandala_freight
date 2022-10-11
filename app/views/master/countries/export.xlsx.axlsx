@@ -9,7 +9,7 @@ wb.styles do |style|
   wb.add_worksheet(name: controller_name.display) do |sheet|
     sheet.add_row ["Name", "Short Name", "Status"], style: header_style
 
-    @countries.each do |resource|
+    @resources.each do |resource|
       sheet.add_row [
         resource.name,
         resource.short_name,

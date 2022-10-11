@@ -2,9 +2,6 @@
 
 module Master
   class CountriesController < Master::HomeController
-    before_action { active_sidebar_sub_item_option("countries") }
-    before_action { breadcrumbs.add "Countries", master_countries_path, title: "Countries List" }
-
     def index
       @search = current_account.countries.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
@@ -23,7 +20,7 @@ module Master
       @country = current_account.countries.new(country_params)
 
       if @country.save
-        redirect_to master_countries_path, flash: { success: t("flash_messages.created", name: "Country") }
+        redirect_to index_path, flash: { success: t("flash_messages.created", name: resource_name) }
       else
         render :new
       end
@@ -35,60 +32,10 @@ module Master
 
     def update
       if country.update(country_params)
-        redirect_to master_countries_path, flash: { success: t("flash_messages.updated", name: "Country") }
+        redirect_to index_path, flash: { success: t("flash_messages.updated", name: resource_name) }
       else
         render :edit
       end
-    end
-
-    def destroy
-      if country.trashed
-        redirect_to master_countries_path, flash: { success: t("flash_messages.deleted", name: "Country") }
-      else
-        redirect_to master_countries_path, flash: { danger: t("flash_messages.already_deleted", name: "Country") }
-      end
-    end
-
-    def archive
-      if country.archive
-        redirect_to master_countries_path, flash: { success: t("flash_messages.archived", name: "Country") }
-      else
-        redirect_to master_countries_path, flash: { danger: t("flash_messages.already_archived", name: "Country") }
-      end
-    end
-
-    def unarchive
-      if country.unarchive
-        redirect_to master_countries_path, flash: { success: t("flash_messages.unarchived", name: "Country") }
-      else
-        redirect_to master_countries_path, flash: { danger: t("flash_messages.already_unarchived", name: "Country") }
-      end
-    end
-
-    def restore
-      if country.restore
-        redirect_to master_countries_path, flash: { success: t("flash_messages.restored", name: "Country") }
-      else
-        redirect_to master_countries_path, flash: { danger: t("flash_messages.already_restored", name: "Country") }
-      end
-    end
-
-    def export
-      @search = current_account.countries.ransack(params[:q])
-      @search.sorts = "id desc" if @search.sorts.empty?
-      @countries = @search.result
-
-      respond_to do |format|
-        format.xlsx do
-          response.headers["Content-Disposition"] =
-            "attachment; filename=countries_#{I18n.l(Time.current, format: :filename)}.xlsx"
-        end
-      end
-    end
-
-    def import
-      Importers::CountryImportService.call(params[:file], current_user)
-      redirect_to master_countries_path, flash: { success: t("flash_messages.imported", name: "Countries") }
     end
 
     private
@@ -102,7 +49,15 @@ module Master
     end
 
     def page_constant
-      { module_name: "master_countries", module_class: "Country" }
+      { module_name: "master_countries", module_class: resource_name }
+    end
+
+    def resource_name
+      "Country"
+    end
+
+    def resources_name
+      "Countries"
     end
   end
 end

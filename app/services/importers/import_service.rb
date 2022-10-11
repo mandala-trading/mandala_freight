@@ -5,12 +5,12 @@ require "csv"
 
 module Importers
   class ImportService < ApplicationService
-    def initialize(file, user)
-      super()
+    def initialize(file, user, resources_name)
       @csv_data = SmarterCSV.process(file, file_encoding: "bom|utf-8")
       @user = user
       @current_account = @user.account
       @error_string = []
+      @resources_name = resources_name
     end
 
     def call
@@ -26,9 +26,9 @@ module Importers
 
     def send_acknowledgement_mail
       if @error_string.blank?
-        ImportMailer.success(@user, resources_name).deliver_now
+        ImportMailer.success(@user, @resources_name).deliver_now
       else
-        ImportMailer.failure(@user, resources_name, generate_error_csv).deliver_now
+        ImportMailer.failure(@user, @resources_name, generate_error_csv).deliver_now
       end
     end
 

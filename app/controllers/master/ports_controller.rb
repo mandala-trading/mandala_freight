@@ -2,9 +2,6 @@
 
 module Master
   class PortsController < Master::HomeController
-    before_action { active_sidebar_sub_item_option("ports") }
-    before_action { breadcrumbs.add "Ports", master_ports_path, title: "Ports List" }
-
     def index
       @search = current_account.ports.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
@@ -23,7 +20,7 @@ module Master
       @port = current_account.ports.new(port_params)
 
       if @port.save
-        redirect_to master_ports_path, flash: { success: t("flash_messages.created", name: "Port") }
+        redirect_to index_path, flash: { success: t("flash_messages.created", name: resource_name) }
       else
         render :new
       end
@@ -35,67 +32,17 @@ module Master
 
     def update
       if port.update(port_params)
-        redirect_to master_ports_path, flash: { success: t("flash_messages.updated", name: "Port") }
+        redirect_to index_path, flash: { success: t("flash_messages.updated", name: resource_name) }
       else
         render :edit
       end
     end
 
-    def destroy
-      if port.trashed
-        redirect_to master_ports_path, flash: { success: t("flash_messages.deleted", name: "Port") }
-      else
-        redirect_to master_ports_path, flash: { danger: t("flash_messages.already_deleted", name: "Port") }
-      end
-    end
-
-    def archive
-      if port.archive
-        redirect_to master_ports_path, flash: { success: t("flash_messages.archived", name: "Port") }
-      else
-        redirect_to master_ports_path, flash: { danger: t("flash_messages.already_archived", name: "Port") }
-      end
-    end
-
-    def unarchive
-      if port.unarchive
-        redirect_to master_ports_path, flash: { success: t("flash_messages.unarchived", name: "Port") }
-      else
-        redirect_to master_ports_path, flash: { danger: t("flash_messages.already_unarchived", name: "Port") }
-      end
-    end
-
-    def restore
-      if port.restore
-        redirect_to master_ports_path, flash: { success: t("flash_messages.restored", name: "Port") }
-      else
-        redirect_to master_ports_path, flash: { danger: t("flash_messages.already_restored", name: "Port") }
-      end
-    end
-
-    def export
-      @search = current_account.ports.ransack(params[:q])
-      @search.sorts = "id desc" if @search.sorts.empty?
-      @ports = @search.result.includes(included_resources)
-
-      respond_to do |format|
-        format.xlsx do
-          response.headers["Content-Disposition"] =
-            "attachment; filename=ports_#{I18n.l(Time.current, format: :filename)}.xlsx"
-        end
-      end
-    end
-
-    def import
-      Importers::PortsImportService.call(params[:file], current_user)
-      redirect_to master_ports_path, flash: { success: t("flash_messages.imported", name: "Ports") }
-    end
-
     private
 
     def port_params
-      params.require(:port).permit(:name, :city, :country_id, :loading_port, :discharge_port,
-                                   :transhipment_port, :delivery_port)
+      params.require(:port).permit(:name, :city, :country_id, :loading_port, :discharge_port, :transhipment_port,
+                                   :delivery_port)
     end
 
     def port
@@ -108,6 +55,14 @@ module Master
 
     def included_resources
       [:country]
+    end
+
+    def resource_name
+      "Port"
+    end
+
+    def resources_name
+      "Ports"
     end
   end
 end

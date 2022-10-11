@@ -9,7 +9,7 @@ wb.styles do |style|
   wb.add_worksheet(name: controller_name.display) do |sheet|
     sheet.add_row %w[Name Status], style: header_style
 
-    @charge_types.each do |resource|
+    @resources.each do |resource|
       sheet.add_row [
         resource.name,
         resource.status.display

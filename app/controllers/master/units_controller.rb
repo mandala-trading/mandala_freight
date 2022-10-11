@@ -2,9 +2,6 @@
 
 module Master
   class UnitsController < Master::HomeController
-    before_action { active_sidebar_sub_item_option("units") }
-    before_action { breadcrumbs.add "Units", master_units_path, title: "Units List" }
-
     def index
       @search = current_account.units.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
@@ -23,7 +20,7 @@ module Master
       @unit = current_account.units.new(unit_params)
 
       if @unit.save
-        redirect_to master_units_path, flash: { success: t("flash_messages.created", name: "Unit") }
+        redirect_to index_path, flash: { success: t("flash_messages.created", name: resource_name) }
       else
         render :new
       end
@@ -35,61 +32,10 @@ module Master
 
     def update
       if unit.update(unit_params)
-        redirect_to master_units_path, flash: { success: t("flash_messages.updated", name: "Unit") }
+        redirect_to index_path, flash: { success: t("flash_messages.updated", name: resource_name) }
       else
         render :edit
       end
-    end
-
-    def destroy
-      if unit.trashed
-        redirect_to master_units_path, flash: { success: t("flash_messages.deleted", name: "Unit") }
-      else
-        redirect_to master_units_path, flash: { danger: t("flash_messages.already_deleted", name: "Unit") }
-      end
-    end
-
-    def archive
-      if unit.archive
-        redirect_to master_units_path, flash: { success: t("flash_messages.archived", name: "Unit") }
-      else
-        redirect_to master_units_path, flash: { danger: t("flash_messages.already_archived", name: "Unit") }
-      end
-    end
-
-    def unarchive
-      if unit.unarchive
-        redirect_to master_units_path, flash: { success: t("flash_messages.unarchived", name: "Unit") }
-      else
-        redirect_to master_units_path, flash: { danger: t("flash_messages.already_unarchived", name: "Unit") }
-      end
-    end
-
-    def restore
-      if unit.restore
-        redirect_to master_units_path, flash: { success: t("flash_messages.restored", name: "Unit") }
-      else
-        redirect_to master_units_path,
-                    flash: { danger: t("flash_messages.already_restored", name: "Unit") }
-      end
-    end
-
-    def export
-      @search = current_account.units.ransack(params[:q])
-      @search.sorts = "id desc" if @search.sorts.empty?
-      @units = @search.result
-
-      respond_to do |format|
-        format.xlsx do
-          response.headers["Content-Disposition"] =
-            "attachment; filename=units_#{I18n.l(Time.current, format: :filename)}.xlsx"
-        end
-      end
-    end
-
-    def import
-      Importers::UnitsImportService.call(params[:file], current_user)
-      redirect_to master_units_path, flash: { success: t("flash_messages.imported", name: "Units") }
     end
 
     private
@@ -104,6 +50,14 @@ module Master
 
     def page_constant
       { module_name: "master_units", module_class: "Unit" }
+    end
+
+    def resource_name
+      "Unit"
+    end
+
+    def resources_name
+      "Units"
     end
   end
 end

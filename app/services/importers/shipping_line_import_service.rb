@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Importers
-  class ShippingLinesImportService < Importers::ImportService
+  class ShippingLineImportService < Importers::ImportService
     protected
 
     def initialize_resource(data)
@@ -19,14 +19,8 @@ module Importers
     end
 
     def error_csv_header
-      [
-        "Name", "Short Name", "Street Address", "City", "State", "Country",
-        "Zip Code", "Risk Profile", "Remarks", "Error Message"
-      ]
-    end
-
-    def resources_name
-      "Shipping lines"
+      ["Name", "Short Name", "Street Address", "City", "State", "Country", "Zip Code", "Risk Profile", "Remarks",
+       "Error Message"]
     end
   end
 end

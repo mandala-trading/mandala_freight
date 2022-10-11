@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Importers
-  class CurrenciesImportService < Importers::ImportService
+  class CurrencyImportService < Importers::ImportService
     protected
 
     def initialize_resource(data)
@@ -10,10 +10,6 @@ module Importers
 
     def error_csv_header
       ["Name", "Code", "Symbol", "Error Message"]
-    end
-
-    def resources_name
-      "Currencies"
     end
   end
 end
