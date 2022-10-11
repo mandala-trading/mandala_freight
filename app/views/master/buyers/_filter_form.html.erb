@@ -9,8 +9,8 @@
     <%= f.select :risk_profile_eq, risk_profile_list, { include_blank: true, prompt: "-- Select one risk profile --" }, { class: "form-control" } %>
   </div>
 
-  <div class="mb-0">
-    <%= f.label :archived_eq, "Status", class: "form-label" %>
-    <%= f.select :archived_eq, status_filter_list, { include_blank: true, prompt: "-- Select one status --" }, { class: "form-control" } %>
+  <div class="mb-3">
+    <%= f.label :status_eq, "Status", class: "form-label" %>
+    <%= f.select :status_eq, Buyer::STATUS_LIST.display_dropdown, { include_blank: true, prompt: "-- Select one status --" }, { class: "form-control" } %>
   </div>
 <% end %>

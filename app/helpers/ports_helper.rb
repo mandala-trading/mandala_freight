@@ -22,7 +22,7 @@ module PortsHelper
     when :delivery_port
       resource.delivery_port.display
     when :status
-      resource.display_status
+      resource.status.display
     end
   end
 end

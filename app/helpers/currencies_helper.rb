@@ -14,7 +14,7 @@ module CurrenciesHelper
     when :symbol
       resource.symbol
     when :status
-      resource.display_status
+      resource.status.display
     end
   end
 end

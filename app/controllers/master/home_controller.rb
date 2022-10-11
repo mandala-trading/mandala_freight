@@ -2,6 +2,7 @@
 
 module Master
   class HomeController < ApplicationController
+    include Filterable
     include QuickFilterable
 
     before_action :authenticate_user!

@@ -17,9 +17,14 @@
           <% end %>
           <td>
             <div class="button-group">
-              <%= edit_link_using_modal(controller_name, payment_type) %>
-              <%= delete_link(controller_name, payment_type) if payment_type.undiscarded? %>
-              <%= restore_link(controller_name, payment_type) if payment_type.discarded? %>
+              <% if payment_type.deleted? %>
+                <%= restore_link(controller_name, payment_type) %>
+              <% else %>
+                <%= edit_link_using_modal(controller_name, payment_type) %>
+                <%= archive_link(controller_name, payment_type) if payment_type.active? %>
+                <%= unarchive_link(controller_name, payment_type) if payment_type.archived? %>
+                <%= delete_link(controller_name, payment_type) %>
+              <% end %>
             </div>
           </td>
         </tr>

@@ -12,7 +12,7 @@ module UnitsHelper
     when :container_type
       resource.container_type.display
     when :status
-      resource.display_status
+      resource.status.display
     end
   end
 end

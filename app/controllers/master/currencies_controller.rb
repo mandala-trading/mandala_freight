@@ -6,7 +6,7 @@ module Master
     before_action { breadcrumbs.add "Currencies", master_currencies_path, title: "Currencies List" }
 
     def index
-      @search = current_account.currencies.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.currencies.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @pagy, @currencies = pagy(@search.result, items: page_setting.page_items)
     end
@@ -42,10 +42,26 @@ module Master
     end
 
     def destroy
-      if currency.destroy
+      if currency.trashed
         redirect_to master_currencies_path, flash: { success: t("flash_messages.deleted", name: "Currency") }
       else
         redirect_to master_currencies_path, flash: { danger: t("flash_messages.already_deleted", name: "Currency") }
+      end
+    end
+
+    def archive
+      if currency.archive
+        redirect_to master_currencies_path, flash: { success: t("flash_messages.archived", name: "Currency") }
+      else
+        redirect_to master_currencies_path, flash: { danger: t("flash_messages.already_archived", name: "Currency") }
+      end
+    end
+
+    def unarchive
+      if currency.unarchive
+        redirect_to master_currencies_path, flash: { success: t("flash_messages.unarchived", name: "Currency") }
+      else
+        redirect_to master_currencies_path, flash: { danger: t("flash_messages.already_unarchived", name: "Currency") }
       end
     end
 
@@ -57,13 +73,8 @@ module Master
       end
     end
 
-    def filter
-      @search = current_account.currencies.ransack(params[:q])
-      render "shared/filter"
-    end
-
     def export
-      @search = current_account.currencies.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.currencies.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @currencies = @search.result
 
@@ -83,7 +94,7 @@ module Master
     private
 
     def currency_params
-      params.require(:currency).permit(:name, :code, :symbol, :archived)
+      params.require(:currency).permit(:name, :code, :symbol)
     end
 
     def currency

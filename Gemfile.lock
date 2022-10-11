@@ -96,8 +96,6 @@ GEM
       responders
       warden (~> 1.2.3)
     digest (3.1.0)
-    discard (1.2.1)
-      activerecord (>= 4.2, < 8)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -293,7 +291,6 @@ DEPENDENCIES
   bullet (~> 7.0, >= 7.0.3)
   caxlsx_rails (~> 0.6.3)
   devise (~> 4.8, >= 4.8.1)
-  discard (~> 1.2, >= 1.2.1)
   dotenv-rails (~> 2.8, >= 2.8.1)
   faker (~> 2.23)
   jbuilder (~> 2.11, >= 2.11.5)

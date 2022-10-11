@@ -21,7 +21,7 @@ wb.styles do |style|
         resource.zip_code,
         resource.risk_profile.display,
         resource.remarks,
-        resource.display_status
+        resource.status.display
       ], style: row_style
     end
   end

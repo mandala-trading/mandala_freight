@@ -6,7 +6,7 @@ module Master
     before_action { breadcrumbs.add "Freight Items", master_freight_items_path, title: "Freight Items List" }
 
     def index
-      @search = current_account.freight_items.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.freight_items.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @pagy, @freight_items = pagy(@search.result, items: page_setting.page_items)
     end
@@ -42,30 +42,43 @@ module Master
     end
 
     def destroy
-      if freight_item.destroy
-        redirect_to master_freight_items_path, flash: { success: t("flash_messages.deleted", name: "FreightItem") }
+      if freight_item.trashed
+        redirect_to master_freight_items_path, flash: { success: t("flash_messages.deleted", name: "Freight item") }
       else
         redirect_to master_freight_items_path,
                     flash: { danger: t("flash_messages.already_deleted", name: "Freight item") }
       end
     end
 
+    def archive
+      if freight_item.archive
+        redirect_to master_freight_items_path, flash: { success: t("flash_messages.archived", name: "Freight item") }
+      else
+        redirect_to master_freight_items_path,
+                    flash: { danger: t("flash_messages.already_archived", name: "Freight item") }
+      end
+    end
+
+    def unarchive
+      if freight_item.unarchive
+        redirect_to master_freight_items_path, flash: { success: t("flash_messages.unarchived", name: "Freight item") }
+      else
+        redirect_to master_freight_items_path,
+                    flash: { danger: t("flash_messages.already_unarchived", name: "Freight item") }
+      end
+    end
+
     def restore
       if freight_item.restore
-        redirect_to master_freight_items_path, flash: { success: t("flash_messages.restored", name: "FreightItem") }
+        redirect_to master_freight_items_path, flash: { success: t("flash_messages.restored", name: "Freight item") }
       else
         redirect_to master_freight_items_path,
                     flash: { danger: t("flash_messages.already_restored", name: "Freight item") }
       end
     end
 
-    def filter
-      @search = current_account.freight_items.ransack(params[:q])
-      render "shared/filter"
-    end
-
     def export
-      @search = current_account.freight_items.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.freight_items.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @freight_items = @search.result
 
@@ -85,7 +98,7 @@ module Master
     private
 
     def freight_item_params
-      params.require(:freight_item).permit(:name, :archived)
+      params.require(:freight_item).permit(:name)
     end
 
     def freight_item

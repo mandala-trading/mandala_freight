@@ -11,14 +11,6 @@
       <%= render "shared/field_error_messages", resource: @page_setting, key: :page_items %>
     </div>
 
-    <div class="d-flex justify-content-between align-items-center mb-2">
-      <span class="custom-switch-label text-danger">Hide Deleted Records</span>
-      <label class="switch danger">
-        <%= f.check_box :hide_deleted_records, class: "switch-input" %>
-        <span class="slider"></span>
-      </label>
-    </div>
-
     <h6 class="margin-top-20 margin-bottom-10">Column Settings</h6>
     <% all_index_columns.each do |key, value| %>
       <div class="custom-switch-container mb-2">

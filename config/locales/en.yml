@@ -20,20 +20,18 @@ en:
     notice: "success"
     alert: "danger"
 
-  status:
-    archived: "Archived"
-    active: "Active"
-    deleted: "Deleted"
-
   flash_messages:
     created: "%{name} has been successfully created."
     updated: "%{name} has been successfully updated."
     deleted: "%{name} has been successfully deleted."
     restored: "%{name} has been successfully restored."
+    archived: "%{name} has been successfully archived."
+    unarchived: "%{name} has been successfully unarchived."
     imported: "%{name} have been successfully imported."
-    already_deleted: "%{name} has been successfully already deleted."
-    already_restored: "%{name} has been successfully already restored."
-    unable_to_delete: "%{name} hasn't been deleted as it has been used at other places."
+    already_deleted: "%{name} is already deleted."
+    already_restored: "%{name} is already restored."
+    already_archived: "%{name} is already archived."
+    already_unarchived: "%{name} is already unarchived."
 
   email_subjects:
     data_import_success: "%{module_name} Imported"
@@ -42,7 +40,7 @@ en:
   applied_filters:
     country: "Country - %{names}"
     risk_profile: "Risk Profile - %{names}"
-    archived: "Status - %{names}"
+    status: "Status - %{names}"
     loading_port: "Loading Port - %{names}"
     transhipment_port: "Transhipment Port - %{names}"
     discharge_port: "Discharge Port - %{names}"
