@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Importers
-  class UnitsImportService < Importers::ImportService
+  class UnitImportService < Importers::ImportService
     protected
 
     def initialize_resource(data)
@@ -10,10 +10,6 @@ module Importers
 
     def error_csv_header
       ["Name", "Container Type", "Error Message"]
-    end
-
-    def resources_name
-      "Units"
     end
   end
 end

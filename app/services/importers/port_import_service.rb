@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Importers
-  class PortsImportService < Importers::ImportService
+  class PortImportService < Importers::ImportService
     protected
 
     def initialize_resource(data)
@@ -19,10 +19,6 @@ module Importers
     def error_csv_header
       ["Name", "City", "Country", "Loading Port", "Transhipment Port", "Discharge Port", "Delivery Port",
        "Error Message"]
-    end
-
-    def resources_name
-      "Ports"
     end
   end
 end

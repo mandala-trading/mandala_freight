@@ -2,9 +2,6 @@
 
 module Master
   class BuyersController < Master::HomeController
-    before_action { active_sidebar_sub_item_option("buyers") }
-    before_action { breadcrumbs.add "Buyers", master_buyers_path, title: "Buyers List" }
-
     def index
       @search = current_account.buyers.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
@@ -23,7 +20,7 @@ module Master
       @buyer = current_account.buyers.new(buyer_params)
 
       if @buyer.save
-        redirect_to master_buyers_path, flash: { success: t("flash_messages.created", name: "Buyer") }
+        redirect_to index_path, flash: { success: t("flash_messages.created", name: resource_name) }
       else
         render :new
       end
@@ -35,67 +32,17 @@ module Master
 
     def update
       if buyer.update(buyer_params)
-        redirect_to master_buyers_path, flash: { success: t("flash_messages.updated", name: "Buyer") }
+        redirect_to index_path, flash: { success: t("flash_messages.updated", name: resource_name) }
       else
         render :edit
       end
     end
 
-    def destroy
-      if buyer.trashed
-        redirect_to master_buyers_path, flash: { success: t("flash_messages.deleted", name: "Buyer") }
-      else
-        redirect_to master_buyers_path, flash: { danger: t("flash_messages.already_deleted", name: "Buyer") }
-      end
-    end
-
-    def archive
-      if buyer.archive
-        redirect_to master_buyers_path, flash: { success: t("flash_messages.archived", name: "Buyer") }
-      else
-        redirect_to master_buyers_path, flash: { danger: t("flash_messages.already_archived", name: "Buyer") }
-      end
-    end
-
-    def unarchive
-      if buyer.unarchive
-        redirect_to master_buyers_path, flash: { success: t("flash_messages.unarchived", name: "Buyer") }
-      else
-        redirect_to master_buyers_path, flash: { danger: t("flash_messages.already_unarchived", name: "Buyer") }
-      end
-    end
-
-    def restore
-      if buyer.restore
-        redirect_to master_buyers_path, flash: { success: t("flash_messages.restored", name: "Buyer") }
-      else
-        redirect_to master_buyers_path, flash: { danger: t("flash_messages.already_restored", name: "Buyer") }
-      end
-    end
-
-    def export
-      @search = current_account.buyers.ransack(params[:q])
-      @search.sorts = "id desc" if @search.sorts.empty?
-      @buyers = @search.result.includes(included_resources)
-
-      respond_to do |format|
-        format.xlsx do
-          response.headers["Content-Disposition"] =
-            "attachment; filename=buyers_#{I18n.l(Time.current, format: :filename)}.xlsx"
-        end
-      end
-    end
-
-    def import
-      Importers::BuyersImportService.call(params[:file], current_user)
-      redirect_to master_buyers_path, flash: { success: t("flash_messages.imported", name: "Buyers") }
-    end
-
     private
 
     def buyer_params
-      params.require(:buyer).permit(:name, :short_name, :street_address, :city, :state, :zip_code,
-                                    :risk_profile, :remarks, :country_id)
+      params.require(:buyer).permit(:name, :short_name, :street_address, :city, :state, :zip_code, :risk_profile,
+                                    :remarks, :country_id)
     end
 
     def buyer
@@ -108,6 +55,14 @@ module Master
 
     def included_resources
       [:country]
+    end
+
+    def resource_name
+      "Buyer"
+    end
+
+    def resources_name
+      "Buyers"
     end
   end
 end

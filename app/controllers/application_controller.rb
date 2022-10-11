@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
     {}
   end
 
+  def index_path
+    url_for(controller: controller_name, action: "index")
+  end
+
   def page_setting
     @page_setting ||= current_user.find_page_setting(page_constant)
   end

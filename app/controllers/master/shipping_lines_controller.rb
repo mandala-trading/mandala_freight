@@ -2,9 +2,6 @@
 
 module Master
   class ShippingLinesController < Master::HomeController
-    before_action { active_sidebar_sub_item_option("shipping_lines") }
-    before_action { breadcrumbs.add "Shipping Lines", master_shipping_lines_path, title: "Shipping Lines List" }
-
     def index
       @search = current_account.shipping_lines.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
@@ -23,7 +20,7 @@ module Master
       @shipping_line = current_account.shipping_lines.new(shipping_line_params)
 
       if @shipping_line.save
-        redirect_to master_shipping_lines_path, flash: { success: t("flash_messages.created", name: "Shipping line") }
+        redirect_to index_path, flash: { success: t("flash_messages.created", name: resource_name) }
       else
         render :new
       end
@@ -35,65 +32,10 @@ module Master
 
     def update
       if shipping_line.update(shipping_line_params)
-        redirect_to master_shipping_lines_path, flash: { success: t("flash_messages.updated", name: "Shipping line") }
+        redirect_to index_path, flash: { success: t("flash_messages.updated", name: resource_name) }
       else
         render :edit
       end
-    end
-
-    def destroy
-      if shipping_line.trashed
-        redirect_to master_shipping_lines_path, flash: { success: t("flash_messages.deleted", name: "Shipping line") }
-      else
-        redirect_to master_shipping_lines_path,
-                    flash: { danger: t("flash_messages.already_deleted", name: "Shipping line") }
-      end
-    end
-
-    def archive
-      if shipping_line.archive
-        redirect_to master_shipping_lines_path, flash: { success: t("flash_messages.archived", name: "Shipping line") }
-      else
-        redirect_to master_shipping_lines_path,
-                    flash: { danger: t("flash_messages.already_archived", name: "Shipping line") }
-      end
-    end
-
-    def unarchive
-      if shipping_line.unarchive
-        redirect_to master_shipping_lines_path,
-                    flash: { success: t("flash_messages.unarchived", name: "Shipping line") }
-      else
-        redirect_to master_shipping_lines_path,
-                    flash: { danger: t("flash_messages.already_unarchived", name: "Shipping line") }
-      end
-    end
-
-    def restore
-      if shipping_line.restore
-        redirect_to master_shipping_lines_path, flash: { success: t("flash_messages.restored", name: "Shipping line") }
-      else
-        redirect_to master_shipping_lines_path,
-                    flash: { danger: t("flash_messages.already_restored", name: "Shipping line") }
-      end
-    end
-
-    def export
-      @search = current_account.shipping_lines.ransack(params[:q])
-      @search.sorts = "id desc" if @search.sorts.empty?
-      @shipping_lines = @search.result.includes(included_resources)
-
-      respond_to do |format|
-        format.xlsx do
-          response.headers["Content-Disposition"] =
-            "attachment; filename=shipping_lines_#{I18n.l(Time.current, format: :filename)}.xlsx"
-        end
-      end
-    end
-
-    def import
-      Importers::ShippingLinesImportService.call(params[:file], current_user)
-      redirect_to master_shipping_lines_path, flash: { success: t("flash_messages.imported", name: "Shipping lines") }
     end
 
     private
@@ -113,6 +55,14 @@ module Master
 
     def included_resources
       [:country]
+    end
+
+    def resource_name
+      "Shipping line"
+    end
+
+    def resources_name
+      "Shipping lines"
     end
   end
 end

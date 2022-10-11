@@ -2,9 +2,6 @@
 
 module Master
   class PaymentTypesController < Master::HomeController
-    before_action { active_sidebar_sub_item_option("payment_types") }
-    before_action { breadcrumbs.add "Payment Types", master_payment_types_path, title: "Payment Types List" }
-
     def index
       @search = current_account.payment_types.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
@@ -23,7 +20,7 @@ module Master
       @payment_type = current_account.payment_types.new(payment_type_params)
 
       if @payment_type.save
-        redirect_to master_payment_types_path, flash: { success: t("flash_messages.created", name: "Payment type") }
+        redirect_to index_path, flash: { success: t("flash_messages.created", name: resource_name) }
       else
         render :new
       end
@@ -35,64 +32,10 @@ module Master
 
     def update
       if payment_type.update(payment_type_params)
-        redirect_to master_payment_types_path, flash: { success: t("flash_messages.updated", name: "Payment type") }
+        redirect_to index_path, flash: { success: t("flash_messages.updated", name: resource_name) }
       else
         render :edit
       end
-    end
-
-    def destroy
-      if payment_type.trashed
-        redirect_to master_payment_types_path, flash: { success: t("flash_messages.deleted", name: "Payment type") }
-      else
-        redirect_to master_payment_types_path,
-                    flash: { danger: t("flash_messages.already_deleted", name: "Payment type") }
-      end
-    end
-
-    def archive
-      if payment_type.archive
-        redirect_to master_payment_types_path, flash: { success: t("flash_messages.archived", name: "Payment type") }
-      else
-        redirect_to master_payment_types_path,
-                    flash: { danger: t("flash_messages.already_archived", name: "Payment type") }
-      end
-    end
-
-    def unarchive
-      if payment_type.unarchive
-        redirect_to master_payment_types_path, flash: { success: t("flash_messages.unarchived", name: "Payment type") }
-      else
-        redirect_to master_payment_types_path,
-                    flash: { danger: t("flash_messages.already_unarchived", name: "Payment type") }
-      end
-    end
-
-    def restore
-      if payment_type.restore
-        redirect_to master_payment_types_path, flash: { success: t("flash_messages.restored", name: "Payment type") }
-      else
-        redirect_to master_payment_types_path,
-                    flash: { danger: t("flash_messages.already_restored", name: "Payment type") }
-      end
-    end
-
-    def export
-      @search = current_account.payment_types.ransack(params[:q])
-      @search.sorts = "id desc" if @search.sorts.empty?
-      @payment_types = @search.result
-
-      respond_to do |format|
-        format.xlsx do
-          response.headers["Content-Disposition"] =
-            "attachment; filename=payment_types_#{I18n.l(Time.current, format: :filename)}.xlsx"
-        end
-      end
-    end
-
-    def import
-      Importers::PaymentTypesImportService.call(params[:file], current_user)
-      redirect_to master_payment_types_path, flash: { success: t("flash_messages.imported", name: "Payment types") }
     end
 
     private
@@ -107,6 +50,14 @@ module Master
 
     def page_constant
       { module_name: "master_payment_types", module_class: "PaymentType" }
+    end
+
+    def resource_name
+      "Payment type"
+    end
+
+    def resources_name
+      "Payment types"
     end
   end
 end

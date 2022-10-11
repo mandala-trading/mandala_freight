@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module QuickFilterable
+module QuickFilterAction
   extend ActiveSupport::Concern
 
   def quick_filters

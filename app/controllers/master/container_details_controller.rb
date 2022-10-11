@@ -2,11 +2,6 @@
 
 module Master
   class ContainerDetailsController < Master::HomeController
-    before_action { active_sidebar_sub_item_option("container_details") }
-    before_action do
-      breadcrumbs.add "Container Details", master_container_details_path, title: "Container Details List"
-    end
-
     def index
       @search = current_account.container_details.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
@@ -25,8 +20,7 @@ module Master
       @container_detail = current_account.container_details.new(container_detail_params)
 
       if @container_detail.save
-        redirect_to master_container_details_path,
-                    flash: { success: t("flash_messages.created", name: "Container detail") }
+        redirect_to index_path, flash: { success: t("flash_messages.created", name: resource_name) }
       else
         render :new
       end
@@ -38,70 +32,10 @@ module Master
 
     def update
       if container_detail.update(container_detail_params)
-        redirect_to master_container_details_path,
-                    flash: { success: t("flash_messages.updated", name: "Container detail") }
+        redirect_to index_path, flash: { success: t("flash_messages.updated", name: resource_name) }
       else
         render :edit
       end
-    end
-
-    def destroy
-      if container_detail.trashed
-        redirect_to master_container_details_path,
-                    flash: { success: t("flash_messages.deleted", name: "Container detail") }
-      else
-        redirect_to master_container_details_path,
-                    flash: { danger: t("flash_messages.already_deleted", name: "Container detail") }
-      end
-    end
-
-    def archive
-      if container_detail.archive
-        redirect_to master_container_details_path,
-                    flash: { success: t("flash_messages.archived", name: "Container detail") }
-      else
-        redirect_to master_container_details_path,
-                    flash: { danger: t("flash_messages.already_archived", name: "Container detail") }
-      end
-    end
-
-    def unarchive
-      if container_detail.unarchive
-        redirect_to master_container_details_path,
-                    flash: { success: t("flash_messages.unarchived", name: "Container detail") }
-      else
-        redirect_to master_container_details_path,
-                    flash: { danger: t("flash_messages.already_unarchived", name: "Container detail") }
-      end
-    end
-
-    def restore
-      if container_detail.restore
-        redirect_to master_container_details_path,
-                    flash: { success: t("flash_messages.restored", name: "Container detail") }
-      else
-        redirect_to master_container_details_path,
-                    flash: { danger: t("flash_messages.already_restored", name: "Container detail") }
-      end
-    end
-
-    def export
-      @search = current_account.container_details.ransack(params[:q])
-      @search.sorts = "id desc" if @search.sorts.empty?
-      @container_details = @search.result
-
-      respond_to do |format|
-        format.xlsx do
-          response.headers["Content-Disposition"] =
-            "attachment; filename=container_details_#{I18n.l(Time.current, format: :filename)}.xlsx"
-        end
-      end
-    end
-
-    def import
-      Importers::ContainerDetailsImportService.call(params[:file], current_user)
-      redirect_to master_container_details_path,
-                  flash: { success: t("flash_messages.imported", name: "Container details") }
     end
 
     private
@@ -116,6 +50,14 @@ module Master
 
     def page_constant
       { module_name: "master_container_details", module_class: "ContainerDetail" }
+    end
+
+    def resource_name
+      "Container detail"
+    end
+
+    def resources_name
+      "Container details"
     end
   end
 end

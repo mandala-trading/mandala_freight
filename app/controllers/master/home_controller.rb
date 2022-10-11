@@ -2,11 +2,25 @@
 
 module Master
   class HomeController < ApplicationController
-    include Filterable
-    include QuickFilterable
+    include FilterAction
+    include QuickFilterAction
+    include DestroyAction
+    include RestoreAction
+    include ArchiveAction
+    include UnarchiveAction
+    include ExportAction
+    include ImportAction
 
     before_action :authenticate_user!
-    before_action { breadcrumbs.add "Master", nil }
     before_action { active_sidebar_item_option("master") }
+    before_action { active_sidebar_sub_item_option(controller_name) }
+    before_action { breadcrumbs.add "Master", nil }
+    before_action { breadcrumbs.add resources_name, index_path, title: "#{resources_name} List" }
+
+    protected
+
+    def included_resources
+      []
+    end
   end
 end
