@@ -146,3 +146,16 @@
     color: $grey-color;
   }
 }
+
+.dropdown-item {
+  font-size: $font-size;
+}
+
+.nav-tabs {
+  border-color: $grey-bg-color;
+
+ .nav-link.active {
+    border-color: $grey-bg-color;
+    border-bottom-color: transparent;
+  }
+}
