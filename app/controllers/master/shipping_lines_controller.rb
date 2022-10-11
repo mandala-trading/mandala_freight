@@ -6,7 +6,7 @@ module Master
     before_action { breadcrumbs.add "Shipping Lines", master_shipping_lines_path, title: "Shipping Lines List" }
 
     def index
-      @search = current_account.shipping_lines.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.shipping_lines.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @pagy, @shipping_lines = pagy(@search.result.includes(included_resources), items: page_setting.page_items)
     end
@@ -42,11 +42,30 @@ module Master
     end
 
     def destroy
-      if shipping_line.destroy
+      if shipping_line.trashed
         redirect_to master_shipping_lines_path, flash: { success: t("flash_messages.deleted", name: "Shipping line") }
       else
         redirect_to master_shipping_lines_path,
                     flash: { danger: t("flash_messages.already_deleted", name: "Shipping line") }
+      end
+    end
+
+    def archive
+      if shipping_line.archive
+        redirect_to master_shipping_lines_path, flash: { success: t("flash_messages.archived", name: "Shipping line") }
+      else
+        redirect_to master_shipping_lines_path,
+                    flash: { danger: t("flash_messages.already_archived", name: "Shipping line") }
+      end
+    end
+
+    def unarchive
+      if shipping_line.unarchive
+        redirect_to master_shipping_lines_path,
+                    flash: { success: t("flash_messages.unarchived", name: "Shipping line") }
+      else
+        redirect_to master_shipping_lines_path,
+                    flash: { danger: t("flash_messages.already_unarchived", name: "Shipping line") }
       end
     end
 
@@ -59,13 +78,8 @@ module Master
       end
     end
 
-    def filter
-      @search = current_account.shipping_lines.ransack(params[:q])
-      render "shared/filter"
-    end
-
     def export
-      @search = current_account.shipping_lines.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.shipping_lines.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @shipping_lines = @search.result.includes(included_resources)
 
@@ -86,7 +100,7 @@ module Master
 
     def shipping_line_params
       params.require(:shipping_line).permit(:name, :short_name, :street_address, :city, :state, :zip_code,
-                                            :risk_profile, :remarks, :archived, :country_id)
+                                            :risk_profile, :remarks, :country_id)
     end
 
     def shipping_line

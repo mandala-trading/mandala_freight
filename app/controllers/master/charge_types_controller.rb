@@ -6,7 +6,7 @@ module Master
     before_action { breadcrumbs.add "Charge Types", master_charge_types_path, title: "Charge Types List" }
 
     def index
-      @search = current_account.charge_types.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.charge_types.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @pagy, @charge_types = pagy(@search.result, items: page_setting.page_items)
     end
@@ -42,11 +42,29 @@ module Master
     end
 
     def destroy
-      if charge_type.destroy
+      if charge_type.trashed
         redirect_to master_charge_types_path, flash: { success: t("flash_messages.deleted", name: "Charge type") }
       else
         redirect_to master_charge_types_path,
                     flash: { danger: t("flash_messages.already_deleted", name: "Charge type") }
+      end
+    end
+
+    def archive
+      if charge_type.archive
+        redirect_to master_charge_types_path, flash: { success: t("flash_messages.archived", name: "Charge type") }
+      else
+        redirect_to master_charge_types_path,
+                    flash: { danger: t("flash_messages.already_archived", name: "Charge type") }
+      end
+    end
+
+    def unarchive
+      if charge_type.unarchive
+        redirect_to master_charge_types_path, flash: { success: t("flash_messages.unarchived", name: "Charge type") }
+      else
+        redirect_to master_charge_types_path,
+                    flash: { danger: t("flash_messages.already_unarchived", name: "Charge type") }
       end
     end
 
@@ -59,13 +77,8 @@ module Master
       end
     end
 
-    def filter
-      @search = current_account.charge_types.ransack(params[:q])
-      render "shared/filter"
-    end
-
     def export
-      @search = current_account.charge_types.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.charge_types.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @charge_types = @search.result
 
@@ -85,7 +98,7 @@ module Master
     private
 
     def charge_type_params
-      params.require(:charge_type).permit(:name, :archived)
+      params.require(:charge_type).permit(:name)
     end
 
     def charge_type

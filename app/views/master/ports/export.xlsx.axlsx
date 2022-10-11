@@ -21,7 +21,7 @@ wb.styles do |style|
         resource.transhipment_port.display,
         resource.discharge_port.display,
         resource.delivery_port.display,
-        resource.display_status
+        resource.status.display
       ], style: row_style
     end
   end

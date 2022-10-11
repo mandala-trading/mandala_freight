@@ -6,7 +6,7 @@ module Master
     before_action { breadcrumbs.add "Countries", master_countries_path, title: "Countries List" }
 
     def index
-      @search = current_account.countries.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.countries.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @pagy, @countries = pagy(@search.result, items: page_setting.page_items)
     end
@@ -42,10 +42,26 @@ module Master
     end
 
     def destroy
-      if country.destroy
+      if country.trashed
         redirect_to master_countries_path, flash: { success: t("flash_messages.deleted", name: "Country") }
       else
         redirect_to master_countries_path, flash: { danger: t("flash_messages.already_deleted", name: "Country") }
+      end
+    end
+
+    def archive
+      if country.archive
+        redirect_to master_countries_path, flash: { success: t("flash_messages.archived", name: "Country") }
+      else
+        redirect_to master_countries_path, flash: { danger: t("flash_messages.already_archived", name: "Country") }
+      end
+    end
+
+    def unarchive
+      if country.unarchive
+        redirect_to master_countries_path, flash: { success: t("flash_messages.unarchived", name: "Country") }
+      else
+        redirect_to master_countries_path, flash: { danger: t("flash_messages.already_unarchived", name: "Country") }
       end
     end
 
@@ -57,13 +73,8 @@ module Master
       end
     end
 
-    def filter
-      @search = current_account.countries.ransack(params[:q])
-      render "shared/filter"
-    end
-
     def export
-      @search = current_account.countries.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.countries.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @countries = @search.result
 
@@ -83,7 +94,7 @@ module Master
     private
 
     def country_params
-      params.require(:country).permit(:name, :short_name, :archived)
+      params.require(:country).permit(:name, :short_name)
     end
 
     def country

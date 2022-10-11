@@ -4,8 +4,9 @@ class ChargeType < ApplicationRecord
   include QuickSearchable::ChargeType
   include UserTrackable
   include Archivable
-  include Discardable
+  include Deletable
 
+  STATUS_LIST = %w[active archived deleted].freeze
   INDEX_COLUMNS = {
     name: { label: "Name", sortable: true, sort_key: :name, mandatory: true },
     status: { label: "Status", sortable: true, sort_key: :status, mandatory: false }
@@ -21,9 +22,5 @@ class ChargeType < ApplicationRecord
 
   def self.ransackable_scopes(_auth_object = nil)
     %i[quick_search]
-  end
-
-  def display_status
-    discarded? ? I18n.t("status.deleted") : archived_status
   end
 end

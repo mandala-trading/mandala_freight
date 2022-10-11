@@ -12,7 +12,7 @@ module ContainerDetailsHelper
     when :description
       resource.description
     when :status
-      resource.display_status
+      resource.status.display
     end
   end
 end

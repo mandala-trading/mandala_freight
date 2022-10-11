@@ -17,9 +17,14 @@
           <% end %>
           <td>
             <div class="button-group">
-              <%= edit_link_using_modal(controller_name, buyer) %>
-              <%= delete_link(controller_name, buyer) if buyer.undiscarded? %>
-              <%= restore_link(controller_name, buyer) if buyer.discarded? %>
+              <% if buyer.deleted? %>
+                <%= restore_link(controller_name, buyer) %>
+              <% else %>
+                <%= edit_link_using_modal(controller_name, buyer) %>
+                <%= archive_link(controller_name, buyer) if buyer.active? %>
+                <%= unarchive_link(controller_name, buyer) if buyer.archived? %>
+                <%= delete_link(controller_name, buyer) %>
+              <% end %>
             </div>
           </td>
         </tr>

@@ -10,7 +10,7 @@ module PaymentTypesHelper
     when :name
       details_link_using_modal(controller_name, resource, resource.name)
     when :status
-      resource.display_status
+      resource.status.display
     end
   end
 end

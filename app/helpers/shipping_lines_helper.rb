@@ -24,7 +24,7 @@ module ShippingLinesHelper
     when :risk_profile
       resource.risk_profile.display
     when :status
-      resource.display_status
+      resource.status.display
     end
   end
 end

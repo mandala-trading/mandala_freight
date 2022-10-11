@@ -8,7 +8,7 @@ module Master
     end
 
     def index
-      @search = current_account.container_details.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.container_details.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @pagy, @container_details = pagy(@search.result, items: page_setting.page_items)
     end
@@ -46,12 +46,32 @@ module Master
     end
 
     def destroy
-      if container_detail.destroy
+      if container_detail.trashed
         redirect_to master_container_details_path,
                     flash: { success: t("flash_messages.deleted", name: "Container detail") }
       else
         redirect_to master_container_details_path,
                     flash: { danger: t("flash_messages.already_deleted", name: "Container detail") }
+      end
+    end
+
+    def archive
+      if container_detail.archive
+        redirect_to master_container_details_path,
+                    flash: { success: t("flash_messages.archived", name: "Container detail") }
+      else
+        redirect_to master_container_details_path,
+                    flash: { danger: t("flash_messages.already_archived", name: "Container detail") }
+      end
+    end
+
+    def unarchive
+      if container_detail.unarchive
+        redirect_to master_container_details_path,
+                    flash: { success: t("flash_messages.unarchived", name: "Container detail") }
+      else
+        redirect_to master_container_details_path,
+                    flash: { danger: t("flash_messages.already_unarchived", name: "Container detail") }
       end
     end
 
@@ -65,13 +85,8 @@ module Master
       end
     end
 
-    def filter
-      @search = current_account.container_details.ransack(params[:q])
-      render "shared/filter"
-    end
-
     def export
-      @search = current_account.container_details.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.container_details.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @container_details = @search.result
 
@@ -92,7 +107,7 @@ module Master
     private
 
     def container_detail_params
-      params.require(:container_detail).permit(:name, :description, :archived)
+      params.require(:container_detail).permit(:name, :description)
     end
 
     def container_detail

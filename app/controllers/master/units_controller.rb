@@ -6,7 +6,7 @@ module Master
     before_action { breadcrumbs.add "Units", master_units_path, title: "Units List" }
 
     def index
-      @search = current_account.units.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.units.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @pagy, @units = pagy(@search.result, items: page_setting.page_items)
     end
@@ -42,11 +42,26 @@ module Master
     end
 
     def destroy
-      if unit.destroy
+      if unit.trashed
         redirect_to master_units_path, flash: { success: t("flash_messages.deleted", name: "Unit") }
       else
-        redirect_to master_units_path,
-                    flash: { danger: t("flash_messages.already_deleted", name: "Unit") }
+        redirect_to master_units_path, flash: { danger: t("flash_messages.already_deleted", name: "Unit") }
+      end
+    end
+
+    def archive
+      if unit.archive
+        redirect_to master_units_path, flash: { success: t("flash_messages.archived", name: "Unit") }
+      else
+        redirect_to master_units_path, flash: { danger: t("flash_messages.already_archived", name: "Unit") }
+      end
+    end
+
+    def unarchive
+      if unit.unarchive
+        redirect_to master_units_path, flash: { success: t("flash_messages.unarchived", name: "Unit") }
+      else
+        redirect_to master_units_path, flash: { danger: t("flash_messages.already_unarchived", name: "Unit") }
       end
     end
 
@@ -59,13 +74,8 @@ module Master
       end
     end
 
-    def filter
-      @search = current_account.units.ransack(params[:q])
-      render "shared/filter"
-    end
-
     def export
-      @search = current_account.units.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.units.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @units = @search.result
 
@@ -85,7 +95,7 @@ module Master
     private
 
     def unit_params
-      params.require(:unit).permit(:name, :container_type, :archived)
+      params.require(:unit).permit(:name, :container_type)
     end
 
     def unit

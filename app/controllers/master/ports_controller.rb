@@ -6,7 +6,7 @@ module Master
     before_action { breadcrumbs.add "Ports", master_ports_path, title: "Ports List" }
 
     def index
-      @search = current_account.ports.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.ports.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @pagy, @ports = pagy(@search.result.includes(included_resources), items: page_setting.page_items)
     end
@@ -42,10 +42,26 @@ module Master
     end
 
     def destroy
-      if port.destroy
+      if port.trashed
         redirect_to master_ports_path, flash: { success: t("flash_messages.deleted", name: "Port") }
       else
         redirect_to master_ports_path, flash: { danger: t("flash_messages.already_deleted", name: "Port") }
+      end
+    end
+
+    def archive
+      if port.archive
+        redirect_to master_ports_path, flash: { success: t("flash_messages.archived", name: "Port") }
+      else
+        redirect_to master_ports_path, flash: { danger: t("flash_messages.already_archived", name: "Port") }
+      end
+    end
+
+    def unarchive
+      if port.unarchive
+        redirect_to master_ports_path, flash: { success: t("flash_messages.unarchived", name: "Port") }
+      else
+        redirect_to master_ports_path, flash: { danger: t("flash_messages.already_unarchived", name: "Port") }
       end
     end
 
@@ -57,13 +73,8 @@ module Master
       end
     end
 
-    def filter
-      @search = current_account.ports.ransack(params[:q])
-      render "shared/filter"
-    end
-
     def export
-      @search = current_account.ports.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.ports.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @ports = @search.result.includes(included_resources)
 
@@ -83,7 +94,7 @@ module Master
     private
 
     def port_params
-      params.require(:port).permit(:name, :city, :country_id, :archived, :loading_port, :discharge_port,
+      params.require(:port).permit(:name, :city, :country_id, :loading_port, :discharge_port,
                                    :transhipment_port, :delivery_port)
     end
 

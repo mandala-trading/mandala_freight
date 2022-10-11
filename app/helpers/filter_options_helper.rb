@@ -21,10 +21,6 @@ module FilterOptionsHelper
     value.display
   end
 
-  def archived_filter_options(value)
-    value.to_bool ? t("status.archived") : t("status.active")
-  end
-
   def boolean_filter_options(value)
     value.to_bool.display
   end
@@ -45,8 +41,8 @@ module FilterOptionsHelper
       t("applied_filters.delivery_port", names: boolean_filter_options(value))
     when "container_type_eq"
       t("applied_filters.container_type", names: boolean_filter_options(value))
-    when "archived_eq"
-      t("applied_filters.archived", names: archived_filter_options(value))
+    when "status_eq"
+      t("applied_filters.status", names: value.display)
     when "s"
       t("applied_filters.sort_option", names: get_sort_value(value))
     end

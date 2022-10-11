@@ -18,7 +18,7 @@ class PageSettingsController < ApplicationController
   private
 
   def page_setting_params
-    params.require(:page_setting).permit(:page_items, :hide_deleted_records, column_settings: []).tap do |hash|
+    params.require(:page_setting).permit(:page_items, column_settings: []).tap do |hash|
       hash[:column_settings] = { off_columns: page_setting.index_columns.keys.map(&:to_s) - hash[:column_settings] }
     end
   end

@@ -6,7 +6,7 @@ module Master
     before_action { breadcrumbs.add "Buyers", master_buyers_path, title: "Buyers List" }
 
     def index
-      @search = current_account.buyers.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.buyers.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @pagy, @buyers = pagy(@search.result.includes(included_resources), items: page_setting.page_items)
     end
@@ -42,10 +42,26 @@ module Master
     end
 
     def destroy
-      if buyer.destroy
+      if buyer.trashed
         redirect_to master_buyers_path, flash: { success: t("flash_messages.deleted", name: "Buyer") }
       else
         redirect_to master_buyers_path, flash: { danger: t("flash_messages.already_deleted", name: "Buyer") }
+      end
+    end
+
+    def archive
+      if buyer.archive
+        redirect_to master_buyers_path, flash: { success: t("flash_messages.archived", name: "Buyer") }
+      else
+        redirect_to master_buyers_path, flash: { danger: t("flash_messages.already_archived", name: "Buyer") }
+      end
+    end
+
+    def unarchive
+      if buyer.unarchive
+        redirect_to master_buyers_path, flash: { success: t("flash_messages.unarchived", name: "Buyer") }
+      else
+        redirect_to master_buyers_path, flash: { danger: t("flash_messages.already_unarchived", name: "Buyer") }
       end
     end
 
@@ -57,13 +73,8 @@ module Master
       end
     end
 
-    def filter
-      @search = current_account.buyers.ransack(params[:q])
-      render "shared/filter"
-    end
-
     def export
-      @search = current_account.buyers.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.buyers.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @buyers = @search.result.includes(included_resources)
 
@@ -84,7 +95,7 @@ module Master
 
     def buyer_params
       params.require(:buyer).permit(:name, :short_name, :street_address, :city, :state, :zip_code,
-                                    :risk_profile, :remarks, :archived, :country_id)
+                                    :risk_profile, :remarks, :country_id)
     end
 
     def buyer

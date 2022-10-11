@@ -39,10 +39,9 @@ ActiveRecord::Schema.define(version: 2022_09_26_075316) do
     t.string "zip_code", limit: 50, default: "", null: false
     t.column "risk_profile", "enum('no_risk','high_risk','medium_risk','low_risk')", default: "no_risk"
     t.text "remarks"
-    t.boolean "archived", default: false, null: false
+    t.string "status", default: "active", null: false
     t.bigint "country_id", null: false
     t.bigint "account_id", null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -55,9 +54,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_075316) do
 
   create_table "charge_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
-    t.boolean "archived", default: false, null: false
+    t.string "status", default: "active", null: false
     t.bigint "account_id", null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -70,9 +68,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_075316) do
   create_table "container_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
     t.string "description", limit: 250, default: "", null: false
-    t.boolean "archived", default: false, null: false
+    t.string "status", default: "active", null: false
     t.bigint "account_id", null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -85,9 +82,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_075316) do
   create_table "countries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
     t.string "short_name", limit: 20, default: "", null: false
-    t.boolean "archived", default: false, null: false
+    t.string "status", default: "active", null: false
     t.bigint "account_id", null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -101,9 +97,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_075316) do
     t.string "name", limit: 250, default: "", null: false
     t.string "code", limit: 20, default: "", null: false
     t.string "symbol", limit: 20, default: "", null: false
-    t.boolean "archived", default: false, null: false
+    t.string "status", default: "active", null: false
     t.bigint "account_id", null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -126,9 +121,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_075316) do
 
   create_table "freight_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
-    t.boolean "archived", default: false, null: false
+    t.string "status", default: "active", null: false
     t.bigint "account_id", null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -143,7 +137,6 @@ ActiveRecord::Schema.define(version: 2022_09_26_075316) do
     t.string "module_class", limit: 250, null: false
     t.integer "page_items", default: 20, null: false
     t.json "column_settings", null: false
-    t.boolean "hide_deleted_records", default: true, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -152,9 +145,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_075316) do
 
   create_table "payment_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
-    t.boolean "archived", default: false, null: false
+    t.string "status", default: "active", null: false
     t.bigint "account_id", null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -171,10 +163,9 @@ ActiveRecord::Schema.define(version: 2022_09_26_075316) do
     t.boolean "transhipment_port", default: false, null: false
     t.boolean "discharge_port", default: false, null: false
     t.boolean "delivery_port", default: false, null: false
-    t.boolean "archived", default: false, null: false
+    t.string "status", default: "active", null: false
     t.bigint "country_id", null: false
     t.bigint "account_id", null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -194,10 +185,9 @@ ActiveRecord::Schema.define(version: 2022_09_26_075316) do
     t.string "zip_code", limit: 50, default: "", null: false
     t.column "risk_profile", "enum('no_risk','high_risk','medium_risk','low_risk')", default: "no_risk"
     t.text "remarks"
-    t.boolean "archived", default: false, null: false
+    t.string "status", default: "active", null: false
     t.bigint "country_id", null: false
     t.bigint "account_id", null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -211,9 +201,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_075316) do
   create_table "units", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 250, default: "", null: false
     t.boolean "container_type", default: false, null: false
-    t.boolean "archived", default: false, null: false
+    t.string "status", default: "active", null: false
     t.bigint "account_id", null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false

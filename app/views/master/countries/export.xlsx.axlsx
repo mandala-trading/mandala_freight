@@ -13,7 +13,7 @@ wb.styles do |style|
       sheet.add_row [
         resource.name,
         resource.short_name,
-        resource.display_status
+        resource.status.display
       ], style: row_style
     end
   end

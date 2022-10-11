@@ -6,7 +6,7 @@ module Master
     before_action { breadcrumbs.add "Payment Types", master_payment_types_path, title: "Payment Types List" }
 
     def index
-      @search = current_account.payment_types.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.payment_types.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @pagy, @payment_types = pagy(@search.result, items: page_setting.page_items)
     end
@@ -42,11 +42,29 @@ module Master
     end
 
     def destroy
-      if payment_type.destroy
+      if payment_type.trashed
         redirect_to master_payment_types_path, flash: { success: t("flash_messages.deleted", name: "Payment type") }
       else
         redirect_to master_payment_types_path,
                     flash: { danger: t("flash_messages.already_deleted", name: "Payment type") }
+      end
+    end
+
+    def archive
+      if payment_type.archive
+        redirect_to master_payment_types_path, flash: { success: t("flash_messages.archived", name: "Payment type") }
+      else
+        redirect_to master_payment_types_path,
+                    flash: { danger: t("flash_messages.already_archived", name: "Payment type") }
+      end
+    end
+
+    def unarchive
+      if payment_type.unarchive
+        redirect_to master_payment_types_path, flash: { success: t("flash_messages.unarchived", name: "Payment type") }
+      else
+        redirect_to master_payment_types_path,
+                    flash: { danger: t("flash_messages.already_unarchived", name: "Payment type") }
       end
     end
 
@@ -59,13 +77,8 @@ module Master
       end
     end
 
-    def filter
-      @search = current_account.payment_types.ransack(params[:q])
-      render "shared/filter"
-    end
-
     def export
-      @search = current_account.payment_types.public_send(page_setting.filter).ransack(params[:q])
+      @search = current_account.payment_types.ransack(params[:q])
       @search.sorts = "id desc" if @search.sorts.empty?
       @payment_types = @search.result
 
@@ -85,7 +98,7 @@ module Master
     private
 
     def payment_type_params
-      params.require(:payment_type).permit(:name, :archived)
+      params.require(:payment_type).permit(:name)
     end
 
     def payment_type

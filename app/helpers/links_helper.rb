@@ -9,6 +9,24 @@ module LinksHelper
             class: "dropdown-item"
   end
 
+  def archive_link(controller_name, resource)
+    link_to "Archive",
+            url_for(controller: controller_name, action: "archive", id: resource.id),
+            method: :put,
+            data: { confirm: "Are you sure you want to archive the #{controller_name.singular_downcase_display}?" },
+            class: "btn btn-light btn-sm",
+            title: "Archive #{controller_name.singular_display}"
+  end
+
+  def unarchive_link(controller_name, resource)
+    link_to "Unarchive",
+            url_for(controller: controller_name, action: "unarchive", id: resource.id),
+            method: :put,
+            data: { confirm: "Are you sure you want to unarchive the #{controller_name.singular_downcase_display}?" },
+            class: "btn btn-light btn-sm",
+            title: "Unarchive #{controller_name.singular_display}"
+  end
+
   def delete_link(controller_name, resource)
     link_to "Delete",
             url_for(controller: controller_name, action: "destroy", id: resource.id),

@@ -17,9 +17,14 @@
           <% end %>
           <td>
             <div class="button-group">
-              <%= edit_link_using_modal(controller_name, currency) %>
-              <%= delete_link(controller_name, currency) if currency.undiscarded? %>
-              <%= restore_link(controller_name, currency) if currency.discarded? %>
+              <% if currency.deleted? %>
+                <%= restore_link(controller_name, currency) %>
+              <% else %>
+                <%= edit_link_using_modal(controller_name, currency) %>
+                <%= archive_link(controller_name, currency) if currency.active? %>
+                <%= unarchive_link(controller_name, currency) if currency.archived? %>
+                <%= delete_link(controller_name, currency) %>
+              <% end %>
             </div>
           </td>
         </tr>

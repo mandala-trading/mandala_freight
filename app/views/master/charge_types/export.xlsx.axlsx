@@ -12,7 +12,7 @@ wb.styles do |style|
     @charge_types.each do |resource|
       sheet.add_row [
         resource.name,
-        resource.display_status
+        resource.status.display
       ], style: row_style
     end
   end
