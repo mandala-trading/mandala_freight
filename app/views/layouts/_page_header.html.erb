@@ -9,13 +9,13 @@
     </div>
 
     <div class="right-section">
-      <% if yield(:filter_settings).to_bool %>
+      <% if @filter_settings_enabled %>
         <%= link_to url_for(controller: controller_name, action: "quick_filters"), remote: true, class: "header-icon-link margin-left-10", title: "Filter settings" do %>
           <i class="bi bi-funnel-fill"></i>
         <% end %>
       <% end %>
 
-      <% if yield(:page_settings).to_bool %>
+      <% if @page_settings_enabled %>
         <%= link_to edit_page_setting_path(@page_setting), remote: true, class: "header-icon-link margin-left-10", title: "Page settings" do %>
           <i class="bi bi-gear-fill"></i>
         <% end %>

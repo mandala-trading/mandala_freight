@@ -22,17 +22,17 @@
 }
 
 .page-card {
-  border-radius: $default-border-radius;
   background-color: $white-color;
-  box-shadow: $default-box-shadow;
+  padding: 30px;
+  border: 1px solid $grey-bg-color;
+
+  &.no-top-border {
+    border-top: 0;
+  }
 }
 
 .page-card-header {
-  padding: 30px 30px 20px;
   display: flex;
   justify-content: space-between;
-}
-
-.page-card-body {
-  padding: 30px;
+  margin-bottom: 20px;
 }

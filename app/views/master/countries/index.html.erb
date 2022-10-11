@@ -1,9 +1,9 @@
 <% provide(:page_title, "Countries") %>
 <% provide(:page_header, "Countries") %>
-<% provide(:page_settings, true) %>
-<% provide(:filter_settings, true) %>
 
-<div class="page-card">
+<%= render "master/shared/index_tabs" %>
+
+<div class="page-card no-top-border">
   <div class="page-card-header">
     <%= render "shared/quick_search_form", path: master_countries_path %>
 
