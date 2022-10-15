@@ -10,8 +10,6 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_current_user, unless: :devise_controller?
-  before_action { page_settings_enabled_option(false) }
-  before_action { filter_settings_enabled_option(false) }
 
   helper_method :page_constant, :index_path
 
@@ -32,14 +30,6 @@ class ApplicationController < ActionController::Base
 
   def page_setting
     @page_setting ||= current_user.find_page_setting(page_constant)
-  end
-
-  def page_settings_enabled_option(option)
-    @page_settings_enabled = option
-  end
-
-  def filter_settings_enabled_option(option)
-    @filter_settings_enabled = option
   end
 
   def active_sidebar_item_option(option)

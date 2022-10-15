@@ -10,7 +10,7 @@ class Port < ApplicationRecord
     city: { label: "City", sortable: true, sort_key: :city, mandatory: false },
     country: { label: "Country", sortable: true, sort_key: :country_name, mandatory: false },
     loading_port: { label: "Loading Port", sortable: true, sort_key: :loading_port, mandatory: false },
-    transhipment_port: { label: "Transhipment Port", sortable: true, sort_key: :transhipment_port, mandatory: false },
+    transhipment_port: { label: "Trans. Port", sortable: true, sort_key: :transhipment_port, mandatory: false },
     discharge_port: { label: "Discharge Port", sortable: true, sort_key: :discharge_port, mandatory: false },
     delivery_port: { label: "Delivery Port", sortable: true, sort_key: :delivery_port, mandatory: false },
     archived: { label: "Archived", sortable: true, sort_key: :archived, mandatory: false }

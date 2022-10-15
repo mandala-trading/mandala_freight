@@ -9,8 +9,6 @@ module Master
     include ImportAction
 
     before_action :authenticate_user!
-    before_action { page_settings_enabled_option(true) }
-    before_action { filter_settings_enabled_option(true) }
     before_action { active_sidebar_item_option("master") }
     before_action { active_sidebar_sub_item_option(controller_name) }
     before_action { breadcrumbs.add "Master", nil }

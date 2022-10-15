@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :email, presence: true, length: { maximum: 250 }
 
+  # TODO: Sanitize page constant value
   def find_page_setting(page_constant)
     page_settings.find_by(page_constant) || page_settings.create(page_constant)
   end
