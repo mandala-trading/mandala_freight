@@ -8,6 +8,7 @@
     <%= render "shared/quick_search_form", path: master_payment_types_path %>
 
     <div class="button-group">
+      <%= render "shared/quick_filter_dropdowns" %>
       <%= new_link_using_modal(controller_name) %>
       <%= filter_link_using_modal(controller_name) %>
 

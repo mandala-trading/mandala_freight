@@ -150,3 +150,16 @@
 .dropdown-item {
   font-size: $font-size;
 }
+
+.quick-filter-select {
+  width: 200px;
+  margin-left: 3px;
+  margin-right: 3px;
+  border-color: $grey-color;
+  color: $text-color;
+  padding: 8px 16px;
+  transition: $default-transition;
+  font-size: $font-size;
+  border-radius: $default-border-radius;
+  border-color: $grey-color;
+}
