@@ -8,6 +8,7 @@
   background-color: $white-color;
   padding-bottom: 65px;
   transition: $default-transition;
+  border-right: 1px solid $grey-bg-color;
 
   .brand-container {
     display: flex;

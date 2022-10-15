@@ -10,7 +10,7 @@ class Buyer < ApplicationRecord
   INDEX_COLUMNS = {
     name: { label: "Name", sortable: true, sort_key: :name, mandatory: true },
     short_name: { label: "Short Name", sortable: true, sort_key: :short_name, mandatory: false },
-    street_address: { label: "Street Address", sortable: true, sort_key: :street_address, mandatory: false },
+    street_address: { label: "Street Addr.", sortable: true, sort_key: :street_address, mandatory: false },
     city: { label: "City", sortable: true, sort_key: :city, mandatory: false },
     state: { label: "State", sortable: true, sort_key: :state, mandatory: false },
     country: { label: "Country", sortable: true, sort_key: :country_name, mandatory: false },
