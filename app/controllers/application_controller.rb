@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_current_user, unless: :devise_controller?
 
-  helper_method :page_constant, :index_path
+  helper_method :filter_options, :page_constant, :index_path
 
   protected
 
@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
 
   def index_path
     url_for(controller: controller_name, action: "index")
+  end
+
+  def filter_options
+    @filter_options = current_user.find_filter_options(page_constant)
   end
 
   def page_setting

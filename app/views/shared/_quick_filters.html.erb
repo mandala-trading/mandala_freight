@@ -6,8 +6,8 @@
 <div class="modal-body">
   <%= render "shared/flash_message" %>
 
-  <% if @filter_options.present? %>
-    <% @filter_options.each do |filter_option| %>
+  <% if filter_options.present? %>
+    <% filter_options.each do |filter_option| %>
       <div class="custom-switch-container mb-2" id="filter_option_<%= filter_option.id %>">
         <span><%= filter_option.name %></span>
         <%= link_to filter_option_path(filter_option), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete the filter option?" }, class: "text-danger", title: "Delete filter option" do %>

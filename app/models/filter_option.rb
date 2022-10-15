@@ -22,6 +22,10 @@ class FilterOption < ApplicationRecord
     JSON.parse(filters).map { |k, v| "q[#{k}]=#{v}" }.join("&")
   end
 
+  def filter_string_with_id
+    "#{filter_string}&filter_option=#{id}"
+  end
+
   def page_constant
     { module_name:, module_class: }
   end

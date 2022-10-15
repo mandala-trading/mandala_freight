@@ -1,0 +1,29 @@
+<% if filter_options.present? %>
+  <select class="form-select quick-filter-select">
+    <% if params[:filter_option].blank? %>
+      <option value="all" selected>All</option>
+    <% else %>
+      <option value="all">All</option>
+    <% end %>
+
+    <% filter_options.each do |filter| %>
+      <% if params[:filter_option] == filter.id.to_s %>
+        <option id="filter_<%= filter.id %>" value=<%= filter.filter_string_with_id %> selected><%= filter.name %></option>
+      <% else %>
+        <option id="filter_<%= filter.id %>" value=<%= filter.filter_string_with_id %>><%= filter.name %></option>
+      <% end %>
+    <% end %>
+  </select>
+<% end %>
+
+<script type="text/javascript">
+  $('.quick-filter-select').change(function() {
+    var basePath = window.location.href.split('?')[0];
+
+    if ($(this).val() == "all") {
+      window.location.href = basePath;
+    } else {
+      window.location.href = basePath + '?' + $(this).val();
+    }
+  });
+</script>

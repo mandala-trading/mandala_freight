@@ -23,7 +23,6 @@ class FilterOptionsController < ApplicationController
 
   def destroy
     filter_option.destroy
-    @filter_options = current_user.find_filter_options(filter_option.page_constant)
     flash.now[:danger] = t("flash_messages.deleted", name: "Filter option")
     render "shared/quick_filters"
   end
