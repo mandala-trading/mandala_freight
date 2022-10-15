@@ -21,8 +21,8 @@ module PortsHelper
       resource.discharge_port.display
     when :delivery_port
       resource.delivery_port.display
-    when :status
-      resource.status.display
+    when :archived
+      resource.archived.display
     end
   end
 end

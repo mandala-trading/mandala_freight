@@ -41,7 +41,7 @@ module Master
     private
 
     def country_params
-      params.require(:country).permit(:name, :short_name)
+      params.require(:country).permit(:name, :short_name, :archived)
     end
 
     def country

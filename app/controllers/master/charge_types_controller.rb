@@ -41,7 +41,7 @@ module Master
     private
 
     def charge_type_params
-      params.require(:charge_type).permit(:name)
+      params.require(:charge_type).permit(:name, :archived)
     end
 
     def charge_type

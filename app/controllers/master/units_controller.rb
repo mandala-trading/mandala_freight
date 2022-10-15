@@ -41,7 +41,7 @@ module Master
     private
 
     def unit_params
-      params.require(:unit).permit(:name, :container_type)
+      params.require(:unit).permit(:name, :container_type, :archived)
     end
 
     def unit

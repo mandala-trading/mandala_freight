@@ -11,8 +11,8 @@ module ContainerDetailsHelper
       details_link_using_modal(controller_name, resource, resource.name)
     when :description
       resource.description
-    when :status
-      resource.status.display
+    when :archived
+      resource.archived.display
     end
   end
 end

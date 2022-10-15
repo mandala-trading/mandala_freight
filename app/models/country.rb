@@ -4,16 +4,18 @@ class Country < ApplicationRecord
   include QuickSearchable::Country
   include UserTrackable
   include Archivable
-  include Deletable
 
-  STATUS_LIST = %w[active archived deleted].freeze
   INDEX_COLUMNS = {
     name: { label: "Name", sortable: true, sort_key: :name, mandatory: true },
     short_name: { label: "Short Name", sortable: true, sort_key: :short_name, mandatory: false },
-    status: { label: "Status", sortable: true, sort_key: :status, mandatory: false }
+    archived: { label: "Archived", sortable: true, sort_key: :archived, mandatory: false }
   }.freeze
 
   strip_attributes only: %i[name short_name], collapse_spaces: true, replace_newlines: true
+
+  has_many :buyers, dependent: :destroy
+  has_many :shipping_lines, dependent: :destroy
+  has_many :ports, dependent: :destroy
 
   belongs_to :account, counter_cache: true
 
@@ -25,5 +27,9 @@ class Country < ApplicationRecord
 
   def self.ransackable_scopes(_auth_object = nil)
     %i[quick_search]
+  end
+
+  def destroyable?
+    buyers.blank? && shipping_lines.blank? && ports.blank?
   end
 end

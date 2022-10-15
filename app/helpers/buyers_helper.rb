@@ -23,8 +23,8 @@ module BuyersHelper
       details_link_using_modal("countries", resource.country, resource.country_name)
     when :risk_profile
       resource.risk_profile.display
-    when :status
-      resource.status.display
+    when :archived
+      resource.archived.display
     end
   end
 end

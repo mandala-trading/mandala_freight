@@ -4,12 +4,10 @@ class FreightItem < ApplicationRecord
   include QuickSearchable::FreightItem
   include UserTrackable
   include Archivable
-  include Deletable
 
-  STATUS_LIST = %w[active archived deleted].freeze
   INDEX_COLUMNS = {
     name: { label: "Name", sortable: true, sort_key: :name, mandatory: true },
-    status: { label: "Status", sortable: true, sort_key: :status, mandatory: false }
+    archived: { label: "Archived", sortable: true, sort_key: :archived, mandatory: false }
   }.freeze
 
   strip_attributes only: :name, collapse_spaces: true, replace_newlines: true
@@ -22,5 +20,9 @@ class FreightItem < ApplicationRecord
 
   def self.ransackable_scopes(_auth_object = nil)
     %i[quick_search]
+  end
+
+  def destroyable?
+    true
   end
 end

@@ -17,14 +17,8 @@
           <% end %>
           <td>
             <div class="button-group">
-              <% if country.deleted? %>
-                <%= restore_link(controller_name, country) %>
-              <% else %>
-                <%= edit_link_using_modal(controller_name, country) %>
-                <%= archive_link(controller_name, country) if country.active? %>
-                <%= unarchive_link(controller_name, country) if country.archived? %>
-                <%= delete_link(controller_name, country) %>
-              <% end %>
+              <%= edit_link_using_modal(controller_name, country) %>
+              <%= delete_confirm_link(controller_name, country) %>
             </div>
           </td>
         </tr>

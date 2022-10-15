@@ -1,11 +1,11 @@
 <%= render layout: "shared/filter_modal_layout", locals: { filter_path: master_units_path } do |f| %>
   <div class="mb-3">
     <%= f.label :container_type_eq, "Container Type", class: "form-label" %>
-    <%= f.select :container_type_eq, container_type_flag_filter_list, { include_blank: true, prompt: "-- Select one flag --" }, { class: "form-control" } %>
+    <%= f.select :container_type_eq, boolean_flag_filter_list, { include_blank: true, prompt: "-- Select option --" }, { class: "form-control" } %>
   </div>
 
   <div class="mb-3">
-    <%= f.label :status_eq, "Status", class: "form-label" %>
-    <%= f.select :status_eq, Unit::STATUS_LIST.display_dropdown, { include_blank: true, prompt: "-- Select one status --" }, { class: "form-control" } %>
+    <%= f.label :archived_eq, "Archived", class: "form-label" %>
+    <%= f.select :archived_eq, boolean_flag_filter_list, { include_blank: true, prompt: "-- Select option --" }, { class: "form-control" } %>
   </div>
 <% end %>

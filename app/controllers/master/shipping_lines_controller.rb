@@ -42,7 +42,7 @@ module Master
 
     def shipping_line_params
       params.require(:shipping_line).permit(:name, :short_name, :street_address, :city, :state, :zip_code,
-                                            :risk_profile, :remarks, :country_id)
+                                            :risk_profile, :remarks, :archived, :country_id)
     end
 
     def shipping_line

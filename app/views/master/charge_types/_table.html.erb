@@ -17,14 +17,8 @@
           <% end %>
           <td>
             <div class="button-group">
-              <% if charge_type.deleted? %>
-                <%= restore_link(controller_name, charge_type) %>
-              <% else %>
-                <%= edit_link_using_modal(controller_name, charge_type) %>
-                <%= archive_link(controller_name, charge_type) if charge_type.active? %>
-                <%= unarchive_link(controller_name, charge_type) if charge_type.archived? %>
-                <%= delete_link(controller_name, charge_type) %>
-              <% end %>
+              <%= edit_link_using_modal(controller_name, charge_type) %>
+              <%= delete_confirm_link(controller_name, charge_type) %>
             </div>
           </td>
         </tr>

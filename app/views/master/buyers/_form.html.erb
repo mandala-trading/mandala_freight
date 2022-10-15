@@ -32,7 +32,7 @@
 
     <div class="col-12 col-md-6 mb-3">
       <%= f.label :country_id, "Country", class: "form-label required" %>
-      <%= f.select :country_id, country_list(@buyer.country_id), { prompt: "-- Select one country --" }, { class: "form-control", required: true } %>
+      <%= f.select :country_id, country_list(@buyer.country_id), { prompt: "-- Select option --" }, { class: "form-control", required: true } %>
       <%= render "shared/field_error_messages", resource: @buyer, key: :country_id %>
     </div>
 
@@ -45,7 +45,7 @@
 
   <div class="mb-3">
     <%= f.label :risk_profile, "Risk Profile", class: "form-label required" %>
-    <%= f.select :risk_profile, risk_profile_list, { prompt: "-- Select one option --" }, { class: "form-control", required: true } %>
+    <%= f.select :risk_profile, risk_profile_list, { prompt: "-- Select option --" }, { class: "form-control", required: true } %>
     <%= render "shared/field_error_messages", resource: @buyer, key: :risk_profile %>
   </div>
 
@@ -53,5 +53,10 @@
     <%= f.label :remarks, class: "form-label" %>
     <%= f.text_area :remarks, placeholder: "Remarks", class: "form-control", rows: 3 %>
     <%= render "shared/field_error_messages", resource: @buyer, key: :remarks %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.check_box :archived, class: "form-check-input" %>
+    <%= f.label :archived, class: "form-check-label" %>
   </div>
 <% end %>

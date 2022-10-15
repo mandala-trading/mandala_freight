@@ -42,7 +42,7 @@ module Master
 
     def buyer_params
       params.require(:buyer).permit(:name, :short_name, :street_address, :city, :state, :zip_code, :risk_profile,
-                                    :remarks, :country_id)
+                                    :remarks, :archived, :country_id)
     end
 
     def buyer

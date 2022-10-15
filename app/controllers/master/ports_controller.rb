@@ -42,7 +42,7 @@ module Master
 
     def port_params
       params.require(:port).permit(:name, :city, :country_id, :loading_port, :discharge_port, :transhipment_port,
-                                   :delivery_port)
+                                   :delivery_port, :archived)
     end
 
     def port

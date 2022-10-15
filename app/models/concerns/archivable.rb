@@ -4,32 +4,17 @@ module Archivable
   extend ActiveSupport::Concern
 
   included do
-    scope :active,       -> { where(status: "active") }
-    scope :archived,     -> { where(status: "archived") }
-    scope :non_archived, -> { where.not(status: "archived") }
-  end
+    validates :archived, inclusion: { in: [true, false] }
 
-  def active?
-    status == "active"
-  end
-
-  def non_active?
-    status != "active"
+    scope :archived,     -> { where(archived: true) }
+    scope :non_archived, -> { where(archived: false) }
   end
 
   def archived?
-    status == "archived"
+    archived?
   end
 
   def non_archived?
-    status != "archived"
-  end
-
-  def archive
-    update(status: "archived") if active?
-  end
-
-  def unarchive
-    update(status: "active") if archived?
+    !archived?
   end
 end

@@ -14,28 +14,23 @@ Rails.application.routes.draw do
       post :import, on: :collection
     end
 
-    concern :restorable do
-      put :restore, on: :member
-    end
-
-    concern :archivable do
-      put :archive, on: :member
-      put :unarchive, on: :member
-    end
-
     concern :quick_filterable do
       get :quick_filters, on: :collection
     end
 
-    resources :countries,         concerns: %i[exportable importable filterable quick_filterable archivable restorable]
-    resources :currencies,        concerns: %i[exportable importable filterable quick_filterable archivable restorable]
-    resources :ports,             concerns: %i[exportable importable filterable quick_filterable archivable restorable]
-    resources :buyers,            concerns: %i[exportable importable filterable quick_filterable archivable restorable]
-    resources :container_details, concerns: %i[exportable importable filterable quick_filterable archivable restorable]
-    resources :shipping_lines,    concerns: %i[exportable importable filterable quick_filterable archivable restorable]
-    resources :freight_items,     concerns: %i[exportable importable filterable quick_filterable archivable restorable]
-    resources :units,             concerns: %i[exportable importable filterable quick_filterable archivable restorable]
-    resources :payment_types,     concerns: %i[exportable importable filterable quick_filterable archivable restorable]
-    resources :charge_types,      concerns: %i[exportable importable filterable quick_filterable archivable restorable]
+    concern :destroyable do
+      get :destroyable, on: :member
+    end
+
+    resources :countries,         concerns: %i[exportable importable filterable quick_filterable destroyable]
+    resources :currencies,        concerns: %i[exportable importable filterable quick_filterable destroyable]
+    resources :ports,             concerns: %i[exportable importable filterable quick_filterable destroyable]
+    resources :buyers,            concerns: %i[exportable importable filterable quick_filterable destroyable]
+    resources :container_details, concerns: %i[exportable importable filterable quick_filterable destroyable]
+    resources :shipping_lines,    concerns: %i[exportable importable filterable quick_filterable destroyable]
+    resources :freight_items,     concerns: %i[exportable importable filterable quick_filterable destroyable]
+    resources :units,             concerns: %i[exportable importable filterable quick_filterable destroyable]
+    resources :payment_types,     concerns: %i[exportable importable filterable quick_filterable destroyable]
+    resources :charge_types,      concerns: %i[exportable importable filterable quick_filterable destroyable]
   end
 end

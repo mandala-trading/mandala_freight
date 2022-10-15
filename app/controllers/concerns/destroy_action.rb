@@ -3,17 +3,22 @@
 module DestroyAction
   extend ActiveSupport::Concern
 
+  def destroyable
+    resource
+    render "shared/destroyable"
+  end
+
   def destroy
-    if record.trashed
+    if resource.destroyable? && resource.destroy
       redirect_to index_path, flash: { success: t("flash_messages.deleted", name: resource_name) }
     else
-      redirect_to index_path, flash: { danger: t("flash_messages.already_deleted", name: resource_name) }
+      redirect_to index_path, flash: { danger: t("flash_messages.undeletable", name: resource_name) }
     end
   end
 
   private
 
-  def record
-    current_account.public_send(controller_name).find(params[:id])
+  def resource
+    @resource ||= current_account.public_send(controller_name).find(params[:id])
   end
 end
