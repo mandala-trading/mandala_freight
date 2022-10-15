@@ -5,9 +5,6 @@ module Master
     include FilterAction
     include QuickFilterAction
     include DestroyAction
-    include RestoreAction
-    include ArchiveAction
-    include UnarchiveAction
     include ExportAction
     include ImportAction
 

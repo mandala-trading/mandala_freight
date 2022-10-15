@@ -24,14 +24,12 @@ en:
     created: "%{name} has been successfully created."
     updated: "%{name} has been successfully updated."
     deleted: "%{name} has been successfully deleted."
-    restored: "%{name} has been successfully restored."
-    archived: "%{name} has been successfully archived."
-    unarchived: "%{name} has been successfully unarchived."
     imported: "%{name} have been successfully imported."
-    already_deleted: "%{name} is already deleted."
-    already_restored: "%{name} is already restored."
-    already_archived: "%{name} is already archived."
-    already_unarchived: "%{name} is already unarchived."
+    undeletable: "%{name} can't be deleted as it has been used at other places."
+
+  confirm_message:
+    deletable: "Are you sure you want to delete the %{name}?"
+    undeletable: "%{name} can't be deleted as it has been used at other places."
 
   email_subjects:
     data_import_success: "%{module_name} Imported"
@@ -40,7 +38,7 @@ en:
   applied_filters:
     country: "Country - %{names}"
     risk_profile: "Risk Profile - %{names}"
-    status: "Status - %{names}"
+    archived: "Archived - %{names}"
     loading_port: "Loading Port - %{names}"
     transhipment_port: "Transhipment Port - %{names}"
     discharge_port: "Discharge Port - %{names}"
@@ -51,7 +49,7 @@ en:
   sort_attributes:
     name: "Name"
     short_name: "Short Name"
-    status: "Status"
+    archived: "Archived"
     code: "Code"
     symbol: "Symbol"
     city: "City"

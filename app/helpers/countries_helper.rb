@@ -11,8 +11,8 @@ module CountriesHelper
       details_link_using_modal(controller_name, resource, resource.name)
     when :short_name
       resource.short_name
-    when :status
-      resource.status.display
+    when :archived
+      resource.archived.display
     end
   end
 end

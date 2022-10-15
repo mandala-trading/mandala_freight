@@ -4,11 +4,9 @@ class Buyer < ApplicationRecord
   include QuickSearchable::Buyer
   include UserTrackable
   include Archivable
-  include Deletable
 
   # Do not change the order of risk profiles
   RISK_PROFILES_LIST = %w[no_risk low_risk medium_risk high_risk].freeze
-  STATUS_LIST = %w[active archived deleted].freeze
   INDEX_COLUMNS = {
     name: { label: "Name", sortable: true, sort_key: :name, mandatory: true },
     short_name: { label: "Short Name", sortable: true, sort_key: :short_name, mandatory: false },
@@ -18,7 +16,7 @@ class Buyer < ApplicationRecord
     country: { label: "Country", sortable: true, sort_key: :country_name, mandatory: false },
     zip_code: { label: "Zip Code", sortable: true, sort_key: :zip_code, mandatory: false },
     risk_profile: { label: "Risk Profile", sortable: true, sort_key: :risk_profile, mandatory: false },
-    status: { label: "Status", sortable: true, sort_key: :status, mandatory: false }
+    archived: { label: "Archived", sortable: true, sort_key: :archived, mandatory: false }
   }.freeze
 
   enum risk_profile: RISK_PROFILES_LIST.to_h { |item| [item, item] }
@@ -43,5 +41,9 @@ class Buyer < ApplicationRecord
 
   def self.ransackable_scopes(_auth_object = nil)
     %i[quick_search]
+  end
+
+  def destroyable?
+    true
   end
 end

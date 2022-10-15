@@ -13,8 +13,8 @@ module CurrenciesHelper
       resource.code
     when :symbol
       resource.symbol
-    when :status
-      resource.status.display
+    when :archived
+      resource.archived.display
     end
   end
 end

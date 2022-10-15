@@ -41,7 +41,7 @@ module Master
     private
 
     def freight_item_params
-      params.require(:freight_item).permit(:name)
+      params.require(:freight_item).permit(:name, :archived)
     end
 
     def freight_item

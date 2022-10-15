@@ -17,14 +17,8 @@
           <% end %>
           <td>
             <div class="button-group">
-              <% if port.deleted? %>
-                <%= restore_link(controller_name, port) %>
-              <% else %>
-                <%= edit_link_using_modal(controller_name, port) %>
-                <%= archive_link(controller_name, port) if port.active? %>
-                <%= unarchive_link(controller_name, port) if port.archived? %>
-                <%= delete_link(controller_name, port) %>
-              <% end %>
+              <%= edit_link_using_modal(controller_name, port) %>
+              <%= delete_confirm_link(controller_name, port) %>
             </div>
           </td>
         </tr>

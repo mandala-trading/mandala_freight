@@ -8,7 +8,7 @@ wb.styles do |style|
 
   wb.add_worksheet(name: controller_name.display) do |sheet|
     sheet.add_row ["Name", "City", "Country", "Loading Port", "Transhipment Port",
-                   "Discharge Port", "Delivery Port", "Status"], style: header_style
+                   "Discharge Port", "Delivery Port", "Archived"], style: header_style
 
     @resources.each do |resource|
       sheet.add_row [
@@ -19,7 +19,7 @@ wb.styles do |style|
         resource.transhipment_port.display,
         resource.discharge_port.display,
         resource.delivery_port.display,
-        resource.status.display
+        resource.archived.display
       ], style: row_style
     end
   end

@@ -8,7 +8,7 @@ wb.styles do |style|
 
   wb.add_worksheet(name: controller_name.display) do |sheet|
     sheet.add_row ["Name", "Short Name", "Street Address", "City", "State", "Country", "Zip Code",
-                   "Risk Profile", "Remarks", "Status"], style: header_style
+                   "Risk Profile", "Remarks", "Archived"], style: header_style
 
     @resources.each do |resource|
       sheet.add_row [
@@ -21,7 +21,7 @@ wb.styles do |style|
         resource.zip_code,
         resource.risk_profile.display,
         resource.remarks,
-        resource.status.display
+        resource.archived.display
       ], style: row_style
     end
   end

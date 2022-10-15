@@ -4,9 +4,7 @@ class Port < ApplicationRecord
   include QuickSearchable::Port
   include UserTrackable
   include Archivable
-  include Deletable
 
-  STATUS_LIST = %w[active archived deleted].freeze
   INDEX_COLUMNS = {
     name: { label: "Name", sortable: true, sort_key: :name, mandatory: true },
     city: { label: "City", sortable: true, sort_key: :city, mandatory: false },
@@ -15,7 +13,7 @@ class Port < ApplicationRecord
     transhipment_port: { label: "Transhipment Port", sortable: true, sort_key: :transhipment_port, mandatory: false },
     discharge_port: { label: "Discharge Port", sortable: true, sort_key: :discharge_port, mandatory: false },
     delivery_port: { label: "Delivery Port", sortable: true, sort_key: :delivery_port, mandatory: false },
-    status: { label: "Status", sortable: true, sort_key: :status, mandatory: false }
+    archived: { label: "Archived", sortable: true, sort_key: :archived, mandatory: false }
   }.freeze
 
   strip_attributes only: %i[name city], collapse_spaces: true, replace_newlines: true
@@ -34,5 +32,9 @@ class Port < ApplicationRecord
 
   def self.ransackable_scopes(_auth_object = nil)
     %i[quick_search]
+  end
+
+  def destroyable?
+    true
   end
 end

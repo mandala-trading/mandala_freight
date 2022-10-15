@@ -3,7 +3,7 @@ class CreateContainerDetails < ActiveRecord::Migration[6.1]
     create_table :container_details do |t|
       t.string     :name,          null: false, default: "", limit: 250
       t.string     :description,   null: false, default: "", limit: 250
-      t.string     :status,        null: false, default: "active"
+      t.boolean    :archived,      null: false, default: false
       t.references :account,       null: false, foreign_key: true
       t.bigint     :created_by_id,              index: true
       t.bigint     :updated_by_id,              index: true

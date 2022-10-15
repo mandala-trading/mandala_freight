@@ -41,7 +41,7 @@ module Master
     private
 
     def currency_params
-      params.require(:currency).permit(:name, :code, :symbol)
+      params.require(:currency).permit(:name, :code, :symbol, :archived)
     end
 
     def currency

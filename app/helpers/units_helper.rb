@@ -11,8 +11,8 @@ module UnitsHelper
       details_link_using_modal(controller_name, resource, resource.name)
     when :container_type
       resource.container_type.display
-    when :status
-      resource.status.display
+    when :archived
+      resource.archived.display
     end
   end
 end

@@ -41,7 +41,7 @@ module Master
     private
 
     def container_detail_params
-      params.require(:container_detail).permit(:name, :description)
+      params.require(:container_detail).permit(:name, :description, :archived)
     end
 
     def container_detail

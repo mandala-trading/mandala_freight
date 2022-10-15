@@ -7,7 +7,7 @@ class CreatePorts < ActiveRecord::Migration[6.1]
       t.boolean    :transhipment_port, null: false, default: false
       t.boolean    :discharge_port,    null: false, default: false
       t.boolean    :delivery_port,     null: false, default: false
-      t.string     :status,            null: false, default: "active"
+      t.boolean    :archived,          null: false, default: false
       t.references :country,           null: false, foreign_key: true
       t.references :account,           null: false, foreign_key: true
       t.bigint     :created_by_id,     index: true
